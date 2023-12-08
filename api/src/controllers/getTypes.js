@@ -24,7 +24,7 @@ routerTypes.post('/', async (req, res) => {
             // Find/create the type
             // console.log(typeName, ' y su ID: ' ,idType);
             const type = await Type.findOrCreate({
-                where: { name: typeName, id: idType },
+                where: { name: typeName, id: idType }, //que coincida con estas cols
                 defaults: { name: typeName, id: idType }, // If the type doesn't exist, create it with the provided name
                 order: [
                     ['id', 'ASC'] //mostrarlos ASC por su ID

@@ -46,8 +46,8 @@ const { Pokemon, Type } = sequelize.models;
 
 //relacion N:N - Pokemons - Types
 // console.log(sequelize.models);
-Pokemon.belongsToMany(Type, {through: 'type_pokemon'});
-Type.belongsToMany(Pokemon, {through: 'type_pokemon'});
+Pokemon.belongsToMany(Type, { through: 'type_pokemon'} );
+Type.belongsToMany(Pokemon, { through: 'type_pokemon'} );
 
 module.exports = {
    ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

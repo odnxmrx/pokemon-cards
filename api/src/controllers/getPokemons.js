@@ -24,6 +24,9 @@ routerGetPokemons.get('/', async (req, res) => {
         let pokemonName = name.toLowerCase(); //lo necesito así
         const singlePokemon = await Pokemon.findOne({
           where: { name: pokemonName},
+          attributes: {
+            exclude: ["createdAt", "updatedAt"]
+          }
         })
         
         if(!pokemonName) {
@@ -34,9 +37,12 @@ routerGetPokemons.get('/', async (req, res) => {
   
       } else { //traer todos en '/'
         const allPokemons = await Pokemon.findAll({
+          attributes: {
+            exclude: ["createdAt", "updatedAt"]
+          },
           include: { //Type,
             model: Type,
-            attributes: ["name"],
+            attributes: ["name"], //requiero solo este dato (atributo)
             through: { //tabla intermedia, nada
               attributes: [],
             }

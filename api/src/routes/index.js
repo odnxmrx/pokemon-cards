@@ -3,6 +3,7 @@ const routerTypes = require('../controllers/getTypes');
 // const {createPokemonDB} = require('../controllers/postPokemon');
 const routerGetPokemons = require('../controllers/getPokemons');
 const { createPokemonHandler } = require('../handlers/postPokemonHandler');
+const getPokemonHandler = require('../handlers/getPokemonHandler');
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -13,6 +14,6 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 router.use('/types', routerTypes);
 router.post('/pokemons', createPokemonHandler);
-router.use('/pokemons', routerGetPokemons);
+router.get('/pokemons', getPokemonHandler);
 
 module.exports = router;
