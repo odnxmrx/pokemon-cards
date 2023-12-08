@@ -32,7 +32,7 @@ const createPokemonDB = async (types, name, hp, attack, defense, speed, height, 
       } else {
         // En caso de que el 'type' no exista
         // res.status(404).json({ error: 'Type not found.' });
-        return 'no esiste tipo'
+        return 'no esiste tipo.'
       }
   } catch (error) {
     // res.status(404).json({ error: error.message });
