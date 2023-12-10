@@ -23,9 +23,7 @@ const createPokemonDB = async (types, name, hp, attack, defense, speed, height, 
 
       const newPok = await Pokemon.create({ name, hp, attack, defense, speed, height, weight})
       
-      if (typeInstances.length > 0) {
-  
-        // Relacionar Pokemon con los 'Types' encontrados
+      if (typeInstances.length > 0) { // Relacionar Pokemon con los 'Types' encontrados
         await newPok.addType(typeInstances);
         return newPok;
   
