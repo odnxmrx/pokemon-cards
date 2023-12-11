@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
-const {Pokemon, Type} = require('./config/db.js');
+// const {Pokemon, Type} = require('./config/db.js');
 //const routerTypes = require('./routes/pokemonTypes.js') //requiero las rutas
 
 require('./config/db.js');

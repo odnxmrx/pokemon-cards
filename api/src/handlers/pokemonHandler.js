@@ -12,10 +12,9 @@ pokemonHandler.post("/", async (req, res) => {
   try {
     // Validar 'types' sea array
     //si no viene en formato ["", ""]; no pasa
-    if (!Array.isArray(types)) throw Error("Types should be an array.");
+    if (!Array.isArray(types)) throw Error("'Types' should be an array.");
 
-    if (![name, hp, attack, defense].every(Boolean))
-      throw Error("Missing required data.");
+    if (![name, hp, attack, defense].every(Boolean)) throw Error("Missing required data.");
 
     const response = await createPokemonDB(
       types,
