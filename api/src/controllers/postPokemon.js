@@ -1,7 +1,7 @@
 // const { Router } = require('express');
 const {Pokemon, Type} = require('../config/db.js');
 
-const createPokemonDB = async (types, name, hp, attack, defense, speed, height, weight) => {
+const createPokemonDB = async (types, name, image, hp, attack, defense, speed, height, weight) => {
   try {
     //RELACION registro Pokemon' con la tabla 'Type'
     // Find the Types associated with the provided type names
@@ -21,7 +21,7 @@ const createPokemonDB = async (types, name, hp, attack, defense, speed, height, 
         return 'Pokemon type(s) must be existing one.';
       }
 
-      const newPok = await Pokemon.create({ name, hp, attack, defense, speed, height, weight})
+      const newPok = await Pokemon.create({ name, image, hp, attack, defense, speed, height, weight})
       
       if (typeInstances.length > 0) { // Relacionar Pokemon con los 'Types' encontrados
         await newPok.addType(typeInstances);

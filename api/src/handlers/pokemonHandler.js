@@ -7,7 +7,7 @@ const pokemonHandler = Router();
 
 //POST obj
 pokemonHandler.post("/", async (req, res) => {
-  const { types, name, hp, attack, defense, speed, height, weight } = req.body;
+  const { types, name, image, hp, attack, defense, speed, height, weight } = req.body;
 
   try {
     // Validar 'types' sea array
@@ -19,6 +19,7 @@ pokemonHandler.post("/", async (req, res) => {
     const response = await createPokemonDB(
       types,
       name,
+      image,
       hp,
       attack,
       defense,
@@ -35,14 +36,14 @@ pokemonHandler.post("/", async (req, res) => {
 
 // GET by query - ?name=
 pokemonHandler.get("/", async (req, res) => {
-  const { name } = req.query;
+  const { name, page } = req.query;
   let pokemonName;
 
   try {
     if (name) {
       pokemonName = name.toLowerCase(); //lo necesito así
     }
-    const singlePokemon = await getPokemon(pokemonName);
+    const singlePokemon = await getPokemon(pokemonName, page);
 
     res.status(200).json(singlePokemon);
     // else  { // cuando no haya query; traer todos en '/'

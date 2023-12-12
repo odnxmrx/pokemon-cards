@@ -14,6 +14,7 @@ const getPokemonById = async (id) => {
           include: {
             //Type,
             model: Type,
+            as: 'types', //alias: debo cambiarlo tambien en la relación (db.js)
             attributes: ["name"], //requiero solo este dato (atributo)
             through: {
               //tabla intermedia, nada

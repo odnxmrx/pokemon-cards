@@ -16,10 +16,10 @@ const Pokemon = (sequelize) => {
       allowNull: false,
       unique: true
     },
-    // image: {
-    //   type: DataTypes.BLOB, // <- type for image ( database :postgresql )
-    //   allowNull: false,
-    // },
+    image: {
+      type: DataTypes.STRING, // <- type for image ( database :postgresql )
+      allowNull: false,
+    },
     hp: { //hp es vida (está en: stats- 0 - stats - name: 'hp')
       type: DataTypes.INTEGER,
       allowNull: false,

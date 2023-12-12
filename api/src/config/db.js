@@ -46,7 +46,7 @@ const { Pokemon, Type } = sequelize.models;
 
 //relacion N:N - Pokemons - Types
 // console.log(sequelize.models);
-Pokemon.belongsToMany(Type, { through: 'type_pokemon'} );
+Pokemon.belongsToMany(Type, { as: 'types', through: 'type_pokemon'} );
 Type.belongsToMany(Pokemon, { through: 'type_pokemon'} );
 
 module.exports = {
