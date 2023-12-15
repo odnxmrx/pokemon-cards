@@ -13,9 +13,9 @@ function Card({ id, name, hp, attack, types }) {
             <Link to={`/pokemon/${id}`}>
                 <h3>{name}</h3>
             </Link>
-            <h3>{hp}</h3>
-            <p>{attack}</p>
-            <div>{pokemonTypes}</div>
+            <h3>HP: {hp}</h3>
+            <p>Attack: {attack}</p>
+            <div>Types: {pokemonTypes}</div>
         </div>
     )
 }

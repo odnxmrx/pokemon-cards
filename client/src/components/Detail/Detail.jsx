@@ -9,7 +9,7 @@ const Detail = () => {
     const dispatch = useDispatch();
     const pokemonDetail = useSelector(state => state.pokemonDetail);
 
-    console.log(pokemonDetail);
+    // console.log(pokemonDetail);
     // const [pokemonDetail, setPokemonDetail] = useState({});
 
     useEffect(() => {

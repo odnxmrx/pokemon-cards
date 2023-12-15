@@ -1,5 +1,5 @@
 
-function NavPage(props) {
+function NavigateBtn(props) {
 
     //condicion para desabilitar botones
     const prevBtnDisabled = props.page === 0; //|| props.allPokemonsLength < 3;
@@ -15,4 +15,4 @@ function NavPage(props) {
     )
 }
 
-export default NavPage;
+export default NavigateBtn;
