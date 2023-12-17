@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 
-function Card({ id, name, hp, attack, types }) {
+function Card({ id, name, image, hp, attack, types }) {
 
-    const pokemonTypes = types.map((type, i) => {
-        return <span key={i}>{type?.name} </span>
-    })
+    // const pokemonTypes = types?.map((type, i) => {
+    //     return <span key={i}>{type} <br /></span>
+    // })
 
     return (
         <div>
@@ -15,7 +15,8 @@ function Card({ id, name, hp, attack, types }) {
             </Link>
             <h3>HP: {hp}</h3>
             <p>Attack: {attack}</p>
-            <div>Types: {pokemonTypes}</div>
+            {/* <div>Types: {pokemonTypes}</div> */}
+            <img src={image} alt={`${name} image`} />
         </div>
     )
 }

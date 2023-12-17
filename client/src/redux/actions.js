@@ -2,7 +2,6 @@ import { GET_ALL_POKEMONS, GET_POKEMON_DETAIL, CLEAN_POKEMON_DETAIL } from "./ac
 import axios from 'axios';
 
 const URL_BASE = 'http://localhost:3001/pokemonapi';
-// const URL_BASE = 'https://jsonplaceholder.typicode.com/users';
 
 export const getAllPokemons = (page) => {
     return async function(dispatch) {

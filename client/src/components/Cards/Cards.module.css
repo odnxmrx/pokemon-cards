@@ -1,0 +1,13 @@
+.mainContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+}
+
+.container {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemonDetail, cleanDetail } from "../../redux/actions";
 
@@ -8,9 +8,6 @@ const Detail = () => {
     const { id } = useParams(); //obtener params.id = 'name' (de la ruta)
     const dispatch = useDispatch();
     const pokemonDetail = useSelector(state => state.pokemonDetail);
-
-    // console.log(pokemonDetail);
-    // const [pokemonDetail, setPokemonDetail] = useState({});
 
     useEffect(() => {
         dispatch(getPokemonDetail(id)); //componentDidMount
@@ -30,6 +27,7 @@ const Detail = () => {
             <p>{pokemonDetail?.defense}</p>
             <p>{pokemonDetail?.speed}</p>
             <div>{pokemonTypes}</div>
+            {/* Me faltan los typessssss */}
             <img src={pokemonDetail?.image} alt="pokemon pic" />
         </div>
     )

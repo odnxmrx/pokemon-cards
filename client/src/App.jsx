@@ -7,6 +7,8 @@ import Cards from './components/Cards/Cards';
 import Detail from './components/Detail/Detail';
 import { getAllPokemons } from './redux/actions';
 import NavBar from './components/NavBar/NavBar';
+import About from './components/About/About';
+import PokemonCreate from './components/PokemonCreate/PokemonCreate';
 
 function App() {
 
@@ -15,7 +17,7 @@ function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [page, setPage] = useState(0); //paginado inicial 1
+  const [page, setPage] = useState(0); //paginado inicial 0
 
   useEffect(() => {
     dispatch(getAllPokemons(page)); //componentDidMount
@@ -42,6 +44,8 @@ function App() {
       <NavBar page={page} setPage={setPage} onSearch={onSearch} />
       <Routes>
         <Route path='/home' element={<Cards />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/create' element={<PokemonCreate />} />
         <Route path='/pokemon/:id' element={<Detail />} />
         {/* <Route path='' element={} /> */}
       </Routes>
