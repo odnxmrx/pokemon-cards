@@ -1,4 +1,3 @@
-// const { Router } = require('express');
 const {Pokemon, Type} = require('../config/db.js');
 
 const createPokemonDB = async (types, name, image, hp, attack, defense, speed, height, weight) => {
@@ -29,7 +28,6 @@ const createPokemonDB = async (types, name, image, hp, attack, defense, speed, h
   
       } else {
         // En caso de que el 'type' no exista
-        // res.status(404).json({ error: 'Type not found.' });
         return 'no esiste tipo.'
       }
   } catch (error) {

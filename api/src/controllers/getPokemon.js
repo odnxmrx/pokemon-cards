@@ -46,7 +46,7 @@ const getPokemon = async (name, pageAt) => {
       }
     } else {
       
-      const paginate = (page = 0, pageSize = 9) => { //'0' por defecto
+      const paginate = (page = 0, pageSize = 12) => { //'0' por defecto
         const offset = page * pageSize;
         const limit = pageSize;
 
@@ -70,7 +70,7 @@ const getPokemon = async (name, pageAt) => {
         //retreive from PokeAPI
         // async function getPokemonBatch() {
         try {
-          const response = await axios.get(`${API_POKEMON}?offset=${offset}&limit=${limit}`); //limite 9 (lotes de 9)
+          const response = await axios.get(`${API_POKEMON}?offset=${offset}&limit=${limit}`); //limite 12 (lotes de 12)
           const { results } = response.data;
 
           let reformattedArrayOfPokemonNames = results.map((poke) => {// {id: #, name: 'pokemon name'}
@@ -120,25 +120,21 @@ const getPokemon = async (name, pageAt) => {
             model: Type,
             as: "types", //alias: debo cambiarlo tambien en la relación (db.js)
             attributes: ["name"], //requiero solo este dato (atributo)
-            through: {
-              //tabla intermedia, nada
+            through: { //tabla intermedia, nada
               attributes: [],
             },
           },
-          // order: [
-          //   ['name', 'ASC'] //mostrarlos ASC por su ID
-          // ],
-          // offset: 0, limit: 9, //Intentando paginacion
-          ...paginate(pageAt),
-          // subQuery: false
         });
-
+        // getThemAllPokemonSource.push(...myDbPokemon);
         // console.log('que esssssssssssss: ', getThemAllPokemonSource);
-        getThemAllPokemonSource.concat(myDbPokemon);
 
         // return getThemAllPokemonSource.concat(myDbPokemon);
-
-        return getThemAllPokemonSource;
+        
+        // if(pageAt == 107){ //107
+          return [...myDbPokemon, ...getThemAllPokemonSource];
+        // } else {
+          // return [...getThemAllPokemonSource];
+        // }
 
       } catch (error) {
         return { error: error.message };
