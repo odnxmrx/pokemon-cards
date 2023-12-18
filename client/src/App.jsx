@@ -27,9 +27,7 @@ function App() {
 
   //traer 'types' de estado global
   const allTypes = useSelector(state => state.allTypes);
-  console.log('se obtuvieron allTypes: ', allTypes);
-
-
+  // console.log('se obtuvieron allTypes: ', allTypes);
 
   function onSearch(name) {
     if (!name) return alert('Please, enter Pokémon name.');
@@ -52,7 +50,7 @@ function App() {
       <Routes>
         <Route path='/home' element={<Cards />} />
         <Route path='/about' element={<About />} />
-        <Route path='/create' element={<PokemonCreate />} />
+        <Route path='/create' element={<PokemonCreate allTypes={allTypes} />} />
         <Route path='/pokemon/:id' element={<Detail />} />
         {/* <Route path='' element={} /> */}
       </Routes>
