@@ -6,7 +6,7 @@ import Searchbar from '../Searchbar/Searchbar';
 export default function NavBar ({page, setPage, onSearch}) {
 
     const allPokemonsLength = useSelector(state => state.allPokemons.length); //del estado, obtenemos allPokemons
-    console.log('Desde NavBar: ', allPokemonsLength);
+    
     return(
         <div>
             <p>My Nav bar</p>

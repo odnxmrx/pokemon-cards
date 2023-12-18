@@ -1,11 +1,11 @@
 import './App.css';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import Cards from './components/Cards/Cards';
 import Detail from './components/Detail/Detail';
-import { getAllPokemons } from './redux/actions';
+import { getAllPokemons, getAllTypes } from './redux/actions';
 import NavBar from './components/NavBar/NavBar';
 import About from './components/About/About';
 import PokemonCreate from './components/PokemonCreate/PokemonCreate';
@@ -20,8 +20,15 @@ function App() {
   const [page, setPage] = useState(0); //paginado inicial 0
 
   useEffect(() => {
-    dispatch(getAllPokemons(page)); //componentDidMount
+    //componentDidMount
+    dispatch(getAllPokemons(page)); 
+    dispatch(getAllTypes());
   }, [page]);
+
+  //traer 'types' de estado global
+  const allTypes = useSelector(state => state.allTypes);
+  console.log('se obtuvieron allTypes: ', allTypes);
+
 
 
   function onSearch(name) {
