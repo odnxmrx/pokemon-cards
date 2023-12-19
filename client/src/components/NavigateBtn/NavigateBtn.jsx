@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import PostPerPage from "../PostsPerPage/PostPerPage";
 
 function NavigateBtn(props) {
 
@@ -15,7 +15,7 @@ function NavigateBtn(props) {
     const nextBtnDisabled = props.allPokemonsLength < 12; //si se muestran menos que '9'
 
     return (
-        <header>
+        <div>
             <p>Page {props.page}</p>
             <button onClick={() => props.setPage(Number(props.page) - 1)} disabled={prevBtnDisabled}>Page {Number(props.page) <= 0 ? 0 : Number(props.page) - 1}</button>
             <button onClick={() => props.setPage(Number(props.page) + 1)} disabled={nextBtnDisabled}>Page {Number(props.page) + 1}</button>
@@ -24,7 +24,8 @@ function NavigateBtn(props) {
                 <input type="search" name="goPage" value={goPage} onChange={handleChange} placeholder="Enter page" />
             </label>
             <button onClick={() => { props.setPage(goPage) }}>Go</button>
-        </header>
+            <PostPerPage pageSize={props.pageSize} setPageSize={props.setPageSize} />
+        </div>
     )
 }
 

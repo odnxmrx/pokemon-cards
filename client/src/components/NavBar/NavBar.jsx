@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import NavigateBtn from "../NavigateBtn/NavigateBtn";
 import Searchbar from '../Searchbar/Searchbar';
 
-export default function NavBar ({page, setPage, onSearch}) {
+export default function NavBar ({page, setPage, onSearch, pageSize, setPageSize}) {
 
     const allPokemonsLength = useSelector(state => state.allPokemons.length); //del estado, obtenemos allPokemons
     
@@ -20,7 +20,7 @@ export default function NavBar ({page, setPage, onSearch}) {
                 <Link to='/create'>Create</Link>
             </button>
             <Searchbar onSearch={onSearch} />
-            <NavigateBtn page={page} setPage={setPage} allPokemonsLength={allPokemonsLength}/>
+            <NavigateBtn page={page} setPage={setPage} allPokemonsLength={allPokemonsLength} pageSize={pageSize} setPageSize={setPageSize} />
 
         </div>
     )

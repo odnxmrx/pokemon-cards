@@ -17,13 +17,14 @@ function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [page, setPage] = useState(0); //paginado inicial 0
+  const [page, setPage] = useState(0); //initial page 0
+  const [pageSize, setPageSize] = useState(12) //items per page
 
   useEffect(() => {
     //componentDidMount
-    dispatch(getAllPokemons(page)); 
+    dispatch(getAllPokemons(page, pageSize));
     dispatch(getAllTypes());
-  }, [page]);
+  }, [page, pageSize]);
 
   //traer 'types' de estado global
   const allTypes = useSelector(state => state.allTypes);
@@ -31,22 +32,22 @@ function App() {
 
   function onSearch(name) {
     if (!name) return alert('Please, enter Pokémon name.');
-    
+
     axios(`${URL_BASE}/pokemons/?name=${name}`)
       .then(({ data }) => {
-          if (data.name) { //verificar si obtuvimos la info
-            navigate(`/pokemon/${data.id}`);
-          } else {
-            alert('Pokémon not found.');
-          }
+        if (data.name) { //verificar si obtuvimos la info
+          navigate(`/pokemon/${data.id}`);
+        } else {
+          alert('Pokémon not found.');
         }
+      }
       )// catch respuesta (error) del servidor:
       .catch(err => alert(`${err.response.data.error}`)) //console.log(err.message))
   }
 
   return (
     <div>
-      <NavBar page={page} setPage={setPage} onSearch={onSearch} />
+      <NavBar page={page} setPage={setPage} onSearch={onSearch} pageSize={pageSize} setPageSize={setPageSize} />
       <Routes>
         <Route path='/home' element={<Cards />} />
         <Route path='/about' element={<About />} />

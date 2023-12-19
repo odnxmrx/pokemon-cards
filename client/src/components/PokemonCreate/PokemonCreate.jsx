@@ -1,5 +1,7 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { validatePokemon } from "./validation";
+import style from './PokemonCreate.module.css';
 
 const PokemonCreate = ({ allTypes }) => {
 
@@ -8,27 +10,35 @@ const PokemonCreate = ({ allTypes }) => {
     const [newPokemon, setNewPokemon] = useState({
         name: '',
     });
-    // console.log('que va siendooooo: ', newPokemon);
+    console.log('que va siendooooo: ', newPokemon);
     const [pokemonTypeSelection, setPokemonTypeSelection] = useState([]);
+
+    const [errors, setErrors] = useState({}); //error validator
 
     const handleInput = (event) => {
         setNewPokemon({
             ...newPokemon,
             [event.target.name]: event.target.value, //valores dinámicos
-            types: pokemonTypeSelection,
+            types: pokemonTypeSelection, //array of types
         })
     }
 
     const listOfTypes = allTypes?.map((type, i) => {
         // console.log(type.name);
         return (<><label key={type.id}>
-            <input type="checkbox" id={type.name} value={type.name} onChange={validateTypeSelection} />{type.name}
+            <input type="checkbox" id={type.name} value={type.name} />{type.name}
         </label></>)
     })
 
 
+    useEffect(()=> {
+        setErrors(validatePokemon(newPokemon));
+    }, [newPokemon])
+
+
+    //******************puedo modularizar: (en error handler) */
     function validateTypeSelection(event) {
-        if (pokemonTypeSelection.length <= 2 && pokemonTypeSelection.indexOf(event.target.value) === -1) {
+        if (pokemonTypeSelection.length < 2 && pokemonTypeSelection.indexOf(event.target.value) === -1) {
             console.log('length del array: ', pokemonTypeSelection.length);
             setPokemonTypeSelection([
                 ...pokemonTypeSelection,
@@ -45,6 +55,7 @@ const PokemonCreate = ({ allTypes }) => {
         }
     }
 
+    console.log('ques pokemon typeselection: ', pokemonTypeSelection);
     // const reformatArrayOfTypes = pokemonTypeSelection.map(type => {
     //     var rType = {};
     //     rType['name'] = type;
@@ -55,11 +66,8 @@ const PokemonCreate = ({ allTypes }) => {
         event.preventDefault();
 
         //POST
-        axios.post(`${URL_BASE}`, newPokemon).then(response => console.log(response))
-            .catch(error => console.log(error.message));
-
-        alert('Pokemon created!')
-
+        axios.post(`${URL_BASE}`, newPokemon).then(response => alert('Pokémon created!'))
+            .catch(error => alert(error.response.data.error));
     }
 
     return (
@@ -75,6 +83,7 @@ const PokemonCreate = ({ allTypes }) => {
                         onChange={handleInput}
                     />
                 </label>
+                {errors.name && <small>*{errors.name}</small>}
 
                 <label htmlFor="">HP:
                     <input
@@ -86,6 +95,8 @@ const PokemonCreate = ({ allTypes }) => {
                         onChange={handleInput}
                     />
                 </label>
+                {errors.hp && <small>*{errors.hp}</small>}
+
 
                 <label htmlFor="">Attack:
                     <input
@@ -93,10 +104,12 @@ const PokemonCreate = ({ allTypes }) => {
                         name="attack"
                         id="attack"
                         min="0"
-                        max="150"
+                        max="180"
                         onChange={handleInput}
                     />
                 </label>
+                {errors.attack && <small>*{errors.attack}</small>}
+
 
                 <label htmlFor="">Defense:
                     <input
@@ -104,10 +117,12 @@ const PokemonCreate = ({ allTypes }) => {
                         name="defense"
                         id="defense"
                         min="0"
-                        max="150"
+                        max="230"
                         onChange={handleInput}
                     />
                 </label>
+                {errors.defense && <small>*{errors.defense}</small>}
+
 
                 <label htmlFor="">Speed:
                     <input
@@ -115,10 +130,12 @@ const PokemonCreate = ({ allTypes }) => {
                         name="speed"
                         id="speed"
                         min="0"
-                        max="150"
+                        max="180"
                         onChange={handleInput}
                     />
                 </label>
+                {errors.speed && <small>*{errors.speed}</small>}
+
 
                 <label htmlFor="">Height:
                     <input
@@ -126,10 +143,12 @@ const PokemonCreate = ({ allTypes }) => {
                         name="height"
                         id="height"
                         min="0"
-                        max="150"
+                        max="20"
                         onChange={handleInput}
                     />
                 </label>
+                {errors.height && <small>*{errors.height}</small>}
+
 
                 <label htmlFor="">Weight:
                     <input
@@ -137,12 +156,14 @@ const PokemonCreate = ({ allTypes }) => {
                         name="weight"
                         id="weight"
                         min="0"
-                        max="150"
+                        max="400"
                         onChange={handleInput}
                     />
                 </label>
+                {errors.weight && <small>*{errors.weight}</small>}
 
-                <fieldset>
+
+                <fieldset onChange={validateTypeSelection} >
                     <legend>Choose up to 2 Pokémon types</legend>
                     {listOfTypes}
                 </fieldset>
