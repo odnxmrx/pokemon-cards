@@ -25,27 +25,31 @@ const Pokemon = (sequelize) => {
       allowNull: false,
       validate: {
         myValidator(value) {
-          if(value < 0 || value > 300) throw Error('HP value surpases limits.')
+          if(value < 0 || value > 255) throw Error('HP value surpases limits.')
         }
       }
     },
     attack: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      len: [0,250]
+      len: [0,180]
     },
     defense: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      len: [0,230],
     }, 
     speed: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      len: [0,180]
     },
     height: {
       type: DataTypes.INTEGER,
+      len: [0,20],
     },
     weight: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      len: [0,400]
     }
   });
 };

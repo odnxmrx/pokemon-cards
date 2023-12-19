@@ -39,14 +39,15 @@ pokemonHandler.post("/", async (req, res) => {
 
 // GET by query - ?name=
 pokemonHandler.get("/", async (req, res) => {
-  const { name, page } = req.query;
+  const { name, page, limit } = req.query;
   let pokemonName;
 
   try {
     if (name) {
       pokemonName = name.toLowerCase(); //lo necesito así
     }
-    const singlePokemon = await getPokemon(pokemonName, page);
+    console.log('estoy recibiendo query limit?', limit);
+    const singlePokemon = await getPokemon(pokemonName, page, limit);
 
     res.status(200).json(singlePokemon);
   } catch (error) {

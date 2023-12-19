@@ -1,5 +1,6 @@
 const { Pokemon, Type } = require("../config/db");
 const API_POKEMON = "https://pokeapi.co/api/v2/pokemon";
+const mapPokemonObject = require("./mapPokemon");
 
 //GET DB || API - by ID
 const getPokemonById = async (id) => {
@@ -33,20 +34,7 @@ const getPokemonById = async (id) => {
           
           const data = await pokemonAPI.json(); //porque 'fetch'
   
-          const mappedData = {
-              id: data.id,
-              name: data.name,
-              hp: data.stats.find((stat) => stat.stat.name === 'hp').base_stat,
-              attack: data.stats.find((stat) => stat.stat.name === 'attack').base_stat,
-              defense: data.stats.find((stat) => stat.stat.name === 'defense').base_stat,
-              speed: data.stats.find((stat) => stat.stat.name === 'speed').base_stat,
-              height: data.height,
-              weight: data.weight,
-              types: data.types.map((type) => type.type.name),
-              image: data.sprites.front_default,
-            };
-  
-          return mappedData;
+          return mapPokemonObject(data); //funcion mapeadora
   
         } catch (error) {
           return { error: error.message };

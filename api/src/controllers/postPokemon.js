@@ -11,13 +11,12 @@ const createPokemonDB = async (types, name, image, hp, attack, defense, speed, h
           //   notEmpty: true 
           // }
         }
-        
       });
       
       //validar que existan en tabla Type
       // console.log(typeInstances.every(type => type instanceof Type)); //booleano
       if(typeInstances.length !== types.length) {
-        return 'Pokemon type(s) must be existing one.';
+        throw Error('Pokemon type(s) must be existing one.');
       }
 
       const newPok = await Pokemon.create({ name, image, hp, attack, defense, speed, height, weight})

@@ -5,7 +5,8 @@ const mapPokemonObject = require("./mapPokemon");
 const API_POKEMON = "https://pokeapi.co/api/v2/pokemon";
 
 //DB by name
-const getPokemon = async (name, pageAt) => {
+const getPokemon = async (name, pageAt, pageLimit) => {
+  console.log('que es pageLimit?', pageLimit);
   try {
     if (name) {
       const singlePokemon = await Pokemon.findOne({
@@ -46,8 +47,9 @@ const getPokemon = async (name, pageAt) => {
       }
     } else {
       
-      const paginate = (page = 0, pageSize = 12) => { //'0' por defecto
-        const offset = page * pageSize;
+      //funcion que determina paginado
+      const paginate = (pageAt = 0, pageSize = 12) => { //'0' por defecto
+        const offset = pageAt * pageSize;
         const limit = pageSize;
 
         return {
@@ -60,22 +62,18 @@ const getPokemon = async (name, pageAt) => {
       try {
         const getThemAllPokemonSource = [];
 
-        // const page = pageAt; //initial value (hardcoriado)
-        const { offset, limit } = paginate(pageAt);
+        const { offset, limit } = paginate(pageAt, pageLimit);
         console.log(offset);
         console.log(limit);
 
-        //traer todos en '/' ***************************************
-
+        //traer TODO en '/' ***************************************
         //retreive from PokeAPI
-        // async function getPokemonBatch() {
         try {
           const response = await axios.get(`${API_POKEMON}?offset=${offset}&limit=${limit}`); //limite 12 (lotes de 12)
           const { results } = response.data;
 
           let reformattedArrayOfPokemonNames = results.map((poke) => {// {id: #, name: 'pokemon name'}
             var rPoke = {}; //aux obj
-
             //get pokemon id from 'url'
             let pokemonUrlToArray = poke.url.split("/");
             let pokemonId = pokemonUrlToArray[pokemonUrlToArray.length - 2]; //el último item está vacío
@@ -131,7 +129,8 @@ const getPokemon = async (name, pageAt) => {
         // return getThemAllPokemonSource.concat(myDbPokemon);
         
         // if(pageAt == 107){ //107
-          return [...myDbPokemon, ...getThemAllPokemonSource];
+          // return [...myDbPokemon, ...getThemAllPokemonSource];
+          return getThemAllPokemonSource;
         // } else {
           // return [...getThemAllPokemonSource];
         // }
