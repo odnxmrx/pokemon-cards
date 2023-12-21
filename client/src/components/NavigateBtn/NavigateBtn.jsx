@@ -1,30 +1,38 @@
 import { useState } from "react";
 import PostPerPage from "../PostsPerPage/PostPerPage";
 
-function NavigateBtn(props) {
+function NavigateBtn({page, setPage, allPokemonsLength}) {
 
-    const [goPage, setGoPage] = useState('');
+    // const [goPage, setGoPage] = useState('');
 
-    function handleChange(event) {
-        setGoPage(event.target.value);
-    }
+    // function handleChange(event) {
+    //     setGoPage(event.target.value);
+    // }
+
+    // //Enter key down listenerv
+    // function handleKeyDown(event) {
+    //     if (event.key === 'Enter') {
+    //         props.setPage(goPage);
+    //     };
+    // };
 
     //condicion para desabilitar botones
-    const prevBtnDisabled = props.page === 0; //|| props.allPokemonsLength < 3;
+    const prevBtnDisabled = page === 0; //|| props.allPokemonsLength < 3;
     // console.log(props.allPokemonsLength);
-    const nextBtnDisabled = props.allPokemonsLength < 12; //si se muestran menos que '9'
+    const nextBtnDisabled = allPokemonsLength < 12; //si se muestran menos que '9'
+
+    const spanStyle = {
+        marginLeft: 'auto',
+        // display: 'flex',
+    }
 
     return (
-        <div>
-            <p>Page {props.page}</p>
-            <button onClick={() => props.setPage(Number(props.page) - 1)} disabled={prevBtnDisabled}>Page {Number(props.page) <= 0 ? 0 : Number(props.page) - 1}</button>
-            <button onClick={() => props.setPage(Number(props.page) + 1)} disabled={nextBtnDisabled}>Page {Number(props.page) + 1}</button>
+        <div style={spanStyle}>
+            <span>Page {page}</span>
+            <button onClick={() => setPage(Number(page) - 1)} disabled={prevBtnDisabled}>&lt; Page {Number(page) <= 0 ? 0 : Number(page) - 1}</button>
+            <button onClick={() => setPage(Number(page) + 1)} disabled={nextBtnDisabled}>Page {Number(page) + 1} &gt;</button>
             <br />
-            <label htmlFor="">Go to page:
-                <input type="search" name="goPage" value={goPage} onChange={handleChange} placeholder="Enter page" />
-            </label>
-            <button onClick={() => { props.setPage(goPage) }}>Go</button>
-            <PostPerPage pageSize={props.pageSize} setPageSize={props.setPageSize} />
+            {/* <PostPerPage pageSize={props.pageSize} setPageSize={props.setPageSize} /> */}
         </div>
     )
 }

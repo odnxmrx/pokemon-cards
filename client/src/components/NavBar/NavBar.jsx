@@ -1,27 +1,28 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import NavigateBtn from "../NavigateBtn/NavigateBtn";
-import Searchbar from '../Searchbar/Searchbar';
+// import Searchbar from '../Searchbar/Searchbar';
+import style from './NavBar.module.css';
 
-export default function NavBar ({page, setPage, onSearch, pageSize, setPageSize}) {
+export default function NavBar() {
 
     const allPokemonsLength = useSelector(state => state.allPokemons.length); //del estado, obtenemos allPokemons
-    
-    return(
-        <div>
-            <p>My Nav bar</p>
-            <button>
-                <Link to='/home'>Home</Link>
-            </button>
-            <button>
-                <Link to='/about'>About</Link>
-            </button>
-            <button>
-                <Link to='/create'>Create</Link>
-            </button>
-            <Searchbar onSearch={onSearch} />
-            <NavigateBtn page={page} setPage={setPage} allPokemonsLength={allPokemonsLength} pageSize={pageSize} setPageSize={setPageSize} />
 
+    return (
+        <div className={style.navContainer}>
+            <div className={style.navMenu}>
+                <ul>
+                    <li className={style.myLogo}>
+                        <Link to='/home'>Pokémon</Link>
+                    </li>
+                    <li>
+                        <Link to='/create'>Create</Link>
+                    </li>
+                    <li>
+                        <Link to='/about'>About</Link>
+                    </li>
+                </ul>
+            </div>
         </div>
     )
 }

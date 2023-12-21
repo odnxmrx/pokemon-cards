@@ -29,16 +29,34 @@ function Card({ id, name, image, hp, attack, types }) {
                             <label for="hp">
                                 <span>HP</span><span>{hp}</span>
                             </label>
-                            <meter id="hp" min="0" max="255" low="63" high="191" optimum="127" value={hp}>{hp}</meter>
-
+                            <meter 
+                                id="hp" 
+                                min="0" 
+                                max="255" 
+                                low="63" 
+                                high="191" 
+                                optimum="127" 
+                                value={hp}
+                            >
+                                {hp}
+                            </meter>
                         </li>
 
                         <li>
                             <label for="attack">
                                 <span>Attack</span><span>{attack}</span>
                             </label>
-                            <meter id="attack" min="0" max="180" low="45" high="135" optimum="90" value={attack}>{attack}</meter>
-
+                            <meter 
+                                id="attack" 
+                                min="0" 
+                                max="180" 
+                                low="45" 
+                                high="135"
+                                optimum="90" 
+                                value={attack}
+                            >
+                                {attack}
+                            </meter>
                         </li>
 
                         <li>

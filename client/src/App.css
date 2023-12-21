@@ -18,6 +18,15 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+label {
+  width: 120px;
+}
+
+label select, input {
+  padding: 10px 15px;
+  border-radius: 0.7rem;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);

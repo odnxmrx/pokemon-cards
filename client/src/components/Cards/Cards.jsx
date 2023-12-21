@@ -1,9 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { filterByPokemonType, orderByPokemonName, orderByPokemonAttack } from '../../redux/actions';
 import Card from '../Card/Card';
+import Searchbar from '../Searchbar/Searchbar';
 import style from './Cards.module.css';
+import GoToPage from '../GoToPage/GoToPage';
+import NavigateBtn from '../NavigateBtn/NavigateBtn';
 
-export default function Cards() {
+export default function Cards({ onSearch, page, setPage }) {
 
     const dispatch = useDispatch();
     const allPokemons = useSelector(state => state.allPokemons); //del estado, obtenemos allPokemons
@@ -37,26 +40,37 @@ export default function Cards() {
     return (
         <div className={style.mainContainer}>
 
-            <label for="typefilter">Filter by Pokémon type:</label>
-            <select name="typefilter" id="typefilter" onChange={handleTypeFilter}>
-                <option value="All">All types</option>
-                {listOfTypes}
-            </select>
+            <div className={style.container}>
 
-            <label for="nameorder">Order by name:</label>
-            <select name="nameorder" id="nameorder" onChange={handleOrderByName}>
-                {/* <option value="orderpokemon" disabled>Order by name</option> */}
-                <option value="A">Ascendant</option>
-                <option value="D">Descendant</option>
-            </select>
+                <div className={style.filterContainer}>
+                <Searchbar onSearch={onSearch} />
 
-            <label for="attackorder">Order by Pokémon attack:</label>
-            <select name="attackorder" id="attackorder" onChange={handleOrderByAttack}>
-                <option value="Menor">Ascendant</option>
-                <option value="Mayor">Descendant</option>
-            </select>
+                    <label for="typefilter">Filter by type:<br />
+                        <select name="typefilter" id="typefilter" onChange={handleTypeFilter}>
+                            <option value="All">All types</option>
+                            {listOfTypes}
+                        </select>
+                    </label>
+                    
+                    <label for="nameorder">Order by name:<br />
+                        <select name="nameorder" id="nameorder" onChange={handleOrderByName}>
+                            {/* <option value="orderpokemon" disabled>Order by name</option> */}
+                            <option value="A">Ascendant</option>
+                            <option value="D">Descendant</option>
+                        </select>
+                    </label>
+                    
+                    <label for="attackorder">Order by attack:<br />
+                        <select name="attackorder" id="attackorder" onChange={handleOrderByAttack}>
+                            <option value="Menor">Ascendant</option>
+                            <option value="Mayor">Descendant</option>
+                        </select>
+                    </label>
+                
+                </div>
+                <NavigateBtn page={page} setPage={setPage} allPokemonsLength={allPokemons.length}/>
+            </div>
 
-            <h1>Cards.</h1>
             <div className={style.container}>
                 {
                     allPokemons?.map((pokemon) => {
@@ -74,6 +88,9 @@ export default function Cards() {
                     })
                 }
             </div>
+            {/* <div>
+            <GoToPage setPage={setPage}/>
+            </div> */}
         </div>
     )
 }
