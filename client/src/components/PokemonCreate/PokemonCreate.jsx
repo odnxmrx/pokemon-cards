@@ -55,7 +55,7 @@ const PokemonCreate = ({ allTypes }) => {
         }
     }
 
-    console.log('ques pokemon typeselection: ', pokemonTypeSelection);
+    // console.log('ques pokemon typeselection: ', pokemonTypeSelection);
     // const reformatArrayOfTypes = pokemonTypeSelection.map(type => {
     //     var rType = {};
     //     rType['name'] = type;
@@ -71,7 +71,7 @@ const PokemonCreate = ({ allTypes }) => {
     }
 
     return (
-        <>
+        <div className={style.formContainer}>
             <form action='' id="pokemon-create" onSubmit={handleSubmit}>
 
                 <label htmlFor="">Name:
@@ -181,7 +181,7 @@ const PokemonCreate = ({ allTypes }) => {
 
                 <button type='submit' id='submit' >Create Pokémon</button>
             </form>
-        </>
+        </div>
     )
 }
 

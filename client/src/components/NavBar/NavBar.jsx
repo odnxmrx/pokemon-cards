@@ -13,7 +13,10 @@ export default function NavBar() {
             <div className={style.navMenu}>
                 <ul>
                     <li className={style.myLogo}>
-                        <Link to='/home'>Pokémon</Link>
+                        <Link to='/home'>Pokémon App</Link>
+                    </li>
+                    <li>
+                        <Link to='/home'>Home</Link>
                     </li>
                     <li>
                         <Link to='/create'>Create</Link>

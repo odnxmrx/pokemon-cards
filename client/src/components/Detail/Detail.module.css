@@ -48,19 +48,20 @@
 .rightContainer {
     display: flex;
     flex-direction: column;
-    flex-grow: 3;
+    flex-grow: 2;
     flex-shrink: 0;
     justify-content: center;
     align-items: center;
 }
 
 .rightContainer img {
-    width: 150px;
-    height: auto;
-    background-image: radial-gradient(#666667 60%, transparent 60%);
-    background-size: 90px 90px;
+    width: 400px;
+    max-height: 350px;
+    margin: 10px 40px;
+    /* background-image: radial-gradient(#666667 60%, transparent 60%);
+    background-size: 350px 350px;
     background-repeat: no-repeat;
-    background-position: 50% 50%;
+    background-position: 50% 90%; */
 }
 
 .roundCircle {

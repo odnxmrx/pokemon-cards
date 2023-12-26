@@ -36,7 +36,7 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    width: 100px;
+    width: 110px;
 }
 
 
@@ -64,7 +64,7 @@
 }
 
 .roundCircle {
-    background-color: rgba(255, 255, 255, 0.125);
+    background-color: rgba(205, 205, 205, 0.125);
     border-radius: .9em;
     padding: 0.25em 0.5em;
     margin: 10px 5px;
@@ -78,19 +78,21 @@
 
 /* :nth-of-type(2n) */
 .rightContainer img {
+    max-width: 100px;
+    max-height: 80px;
     position: relative;
     -webkit-animation: mymove 4s infinite; /* Chrome, Safari, Opera */
     animation: mymove 0.7s infinite;
 }
 
 /* Chrome, Safari, Opera */
-@-webkit-keyframes mymove {
+/* @-webkit-keyframes mymove {
     from {top: 0px;}
     to {top: 4px;}
-}
+} */
 
 /* Standard syntax */
-@keyframes mymove {
+/* @keyframes mymove {
     from {top: 0px;}
-    to {top: 4px;}
-}
+    to {top: 4px;} 
+}*/

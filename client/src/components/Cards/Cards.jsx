@@ -2,9 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { filterByPokemonType, orderByPokemonName, orderByPokemonAttack } from '../../redux/actions';
 import Card from '../Card/Card';
 import Searchbar from '../Searchbar/Searchbar';
-import style from './Cards.module.css';
-import GoToPage from '../GoToPage/GoToPage';
 import NavigateBtn from '../NavigateBtn/NavigateBtn';
+import style from './Cards.module.css';
 
 export default function Cards({ onSearch, page, setPage }) {
 
@@ -43,7 +42,7 @@ export default function Cards({ onSearch, page, setPage }) {
             <div className={style.container}>
 
                 <div className={style.filterContainer}>
-                <Searchbar onSearch={onSearch} />
+                    <Searchbar onSearch={onSearch} />
 
                     <label for="typefilter">Filter by type:<br />
                         <select name="typefilter" id="typefilter" onChange={handleTypeFilter}>
@@ -51,7 +50,7 @@ export default function Cards({ onSearch, page, setPage }) {
                             {listOfTypes}
                         </select>
                     </label>
-                    
+
                     <label for="nameorder">Order by name:<br />
                         <select name="nameorder" id="nameorder" onChange={handleOrderByName}>
                             {/* <option value="orderpokemon" disabled>Order by name</option> */}
@@ -59,16 +58,16 @@ export default function Cards({ onSearch, page, setPage }) {
                             <option value="D">Descendant</option>
                         </select>
                     </label>
-                    
+
                     <label for="attackorder">Order by attack:<br />
                         <select name="attackorder" id="attackorder" onChange={handleOrderByAttack}>
                             <option value="Menor">Ascendant</option>
                             <option value="Mayor">Descendant</option>
                         </select>
                     </label>
-                
+
                 </div>
-                <NavigateBtn page={page} setPage={setPage} allPokemonsLength={allPokemons.length}/>
+                <NavigateBtn page={page} setPage={setPage} allPokemonsLength={allPokemons.length} />
             </div>
 
             <div className={style.container}>
@@ -88,9 +87,6 @@ export default function Cards({ onSearch, page, setPage }) {
                     })
                 }
             </div>
-            {/* <div>
-            <GoToPage setPage={setPage}/>
-            </div> */}
         </div>
     )
 }

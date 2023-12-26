@@ -10,8 +10,9 @@ import NavBar from './components/NavBar/NavBar';
 import About from './components/About/About';
 import PokemonCreate from './components/PokemonCreate/PokemonCreate';
 import GoToPage from './components/GoToPage/GoToPage';
-import NavigateBtn from './components/NavigateBtn/NavigateBtn';
 import PostPerPage from './components/PostsPerPage/PostPerPage';
+import Welcome from './components/Welcome/Welcome';
+import NavigateBtn from './components/NavigateBtn/NavigateBtn';
 
 function App() {
 
@@ -32,21 +33,24 @@ function App() {
 
   //traer 'types' de estado global
   const allTypes = useSelector(state => state.allTypes);
-  // console.log('se obtuvieron allTypes: ', allTypes);
+  const allPokemons = useSelector(state => state.allPokemons);
 
   function onSearch(name) {
     if (!name) return alert('Please, enter Pokémon name.');
 
     axios(`${URL_BASE}/pokemons/?name=${name}`)
+      //.then((response) => { console.log('que es response??: ', response)}, (reason) => { console.log('ques reason??: ', reason);
       .then(({ data }) => {
-        if (data.name) { //verificar si obtuvimos la info
+        if (name) { //verificar si obtuvimos la info
           navigate(`/pokemon/${data.id}`);
-        } else {
+        }
+        else {
+          // console.log(data);
           alert('Pokémon not found.');
         }
       }
       )// catch respuesta (error) del servidor:
-      .catch(err => alert(`${err.response.data.error}`)) //console.log(err.message))
+      .catch(err => console.log(err))
   }
 
   return (
@@ -55,13 +59,12 @@ function App() {
       <Routes>
         <Route path='/home' element={<Cards onSearch={onSearch} page={page} setPage={setPage} pageSize={pageSize} setPageSize={setPageSize} />} />
         <Route path='/about' element={<About />} />
+        <Route path='/' element={<Welcome />} />
         <Route path='/create' element={<PokemonCreate allTypes={allTypes} />} />
         <Route path='/pokemon/:id' element={<Detail />} />
-        {/* <Route path='' element={} /> */}
       </Routes>
-      { pathname === '/home' && <PostPerPage pageSize={pageSize} setPageSize={setPageSize}/> }
-      { pathname === '/home' && <GoToPage setPage={setPage}/> }
-
+      {pathname === '/home' && <PostPerPage pageSize={pageSize} setPageSize={setPageSize} />}
+      {pathname === '/home' && <GoToPage setPage={setPage} />}
     </div>
   )
 }

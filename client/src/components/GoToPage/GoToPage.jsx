@@ -1,4 +1,5 @@
 import { useState } from "react";
+import NavigateBtn from "../NavigateBtn/NavigateBtn";
 
 export default function GoToPage(props) {
 

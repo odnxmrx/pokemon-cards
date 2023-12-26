@@ -15,7 +15,7 @@ const Detail = () => {
         return () => dispatch(cleanDetail()) //al desmontaje, limpiar el estado
     }, [id]) //observar cambios en id
 
-    console.log('que hay en types', pokemonDetail.types);
+    // console.log('que hay en types', pokemonDetail.types);
     const pokemonTypes = pokemonDetail?.types?.map((type, i) => {
         return (<span className={style.roundCircle} key={i}>{type?.name} </span>)
     })
@@ -98,12 +98,13 @@ const Detail = () => {
                         </li>
 
                     </ul>
-
+                    <br />
+                    <div><br />Type: {pokemonTypes}</div>
 
                 </div>
                 <div className={style.rightContainer}>
                     <img src={pokemonDetail?.image} alt={`${pokemonDetail?.name} pokémon picture`} />
-                    <span>Type: {pokemonTypes}</span>
+                    
                 </div>
             </article>
         </div>

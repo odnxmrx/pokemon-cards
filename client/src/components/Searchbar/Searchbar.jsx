@@ -23,7 +23,7 @@ const Searchbar = ({ onSearch }) => {
     return (
         <div>
             <label for="input"> Search Pokémon: <br />
-                <input type='search' name='input' id='input' placeholder="Pokémon name" value={name} onChange={handleChange} onKeyDown={handleKeyDown} />
+                <input type='search' name='input' id='input' placeholder="🔍 Pokémon name" value={name} onChange={handleChange} onKeyDown={handleKeyDown} />
             </label>
             {/* <button onClick={() => { mySearch(name) }}>Search</button> */}
         </div>
