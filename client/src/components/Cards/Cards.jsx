@@ -3,9 +3,10 @@ import { filterByPokemonType, orderByPokemonName, orderByPokemonAttack } from '.
 import Card from '../Card/Card';
 import Searchbar from '../Searchbar/Searchbar';
 import NavigateBtn from '../NavigateBtn/NavigateBtn';
+import SourceToggle from '../SourceToggle/SourceToggle';
 import style from './Cards.module.css';
 
-export default function Cards({ onSearch, page, setPage }) {
+export default function Cards({ onSearch, page, setPage, sourceToggle, setSourceToggle }) {
 
     const dispatch = useDispatch();
     const allPokemons = useSelector(state => state.allPokemons); //del estado, obtenemos allPokemons
@@ -42,6 +43,7 @@ export default function Cards({ onSearch, page, setPage }) {
             <div className={style.container}>
 
                 <div className={style.filterContainer}>
+                    <SourceToggle sourceToggle={sourceToggle} setSourceToggle={setSourceToggle} setPage={setPage} />
                     <Searchbar onSearch={onSearch} />
 
                     <label for="typefilter">Filter by type:<br />

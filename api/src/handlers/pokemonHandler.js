@@ -39,27 +39,26 @@ pokemonHandler.post("/", async (req, res) => {
 
 // GET by query - ?name=
 pokemonHandler.get("/", async (req, res) => {
-  const { name, page, limit } = req.query;
+  const { name, page, limit, source } = req.query;
   let pokemonName;
 
   try {
     if (name) {
       pokemonName = name.toLowerCase(); //lo necesito así
     }
-    console.log('estoy recibiendo query limit?', limit);
-    const singlePokemon = await getPokemon(pokemonName, page, limit);
-
-    res.status(200).json(singlePokemon);
+    const singlePokemon = await getPokemon(pokemonName, page, limit, source);
+    // console.log('que es singlePokemon??? ', singlePokemon);
+    res.json(singlePokemon);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({ error: error.response.data });
   }
 });
 
 // GET by dynamic ID - :id
 pokemonHandler.get("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
+  const { id } = req.params;
 
+  try {
     let pokemonById = await getPokemonById(id);
     res.status(200).json(pokemonById);
   } catch (error) {

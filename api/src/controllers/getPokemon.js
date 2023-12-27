@@ -5,8 +5,8 @@ const mapPokemonObject = require("./mapPokemon");
 const API_POKEMON = "https://pokeapi.co/api/v2/pokemon";
 
 //DB by name
-const getPokemon = async (name, pageAt, pageLimit) => {
-  console.log('que es pageLimit?', pageLimit);
+const getPokemon = async (name, pageAt, pageLimit, source) => {
+  // console.log('que es pageLimit?', pageLimit);
   try {
     if (name) {
       const singlePokemon = await Pokemon.findOne({
@@ -33,12 +33,13 @@ const getPokemon = async (name, pageAt, pageLimit) => {
 
         try {
           const pokemonAPI = await axios(`${API_POKEMON}/${name}`);
-
-          if (pokemonAPI.status === 404) throw new Error("Pokemon not found.");
+          // console.log('que es pokemonAPI???: ', pokemonAPI);
+          // console.log('que es pokemonAPI y s???: ', pokemonAPI.status);
+          if (pokemonAPI.status === 404) throw Error("Pokemon not found.");
 
           const data = pokemonAPI.data;
 
-          if (!data.name) throw new Error("Pokemon does not exists. Try other");
+          if (!data.name) throw Error("Pokemon does not exists. Try other.");
 
           return mapPokemonObject(data); //funcion mapeadora
         } catch (error) {
@@ -46,9 +47,9 @@ const getPokemon = async (name, pageAt, pageLimit) => {
         }
       }
     } else {
-      
       //funcion que determina paginado
-      const paginate = (pageAt = 0, pageSize = 12) => { //'0' por defecto
+      const paginate = (pageAt = 0, pageSize = 12) => {
+        //'0' por defecto
         const offset = pageAt * pageSize;
         const limit = pageSize;
 
@@ -58,9 +59,8 @@ const getPokemon = async (name, pageAt, pageLimit) => {
         };
       };
 
-      
       try {
-        const getThemAllPokemonSource = [];
+        const getThemAllPokemonSource = []; //aux para concatenar fuentes
 
         const { offset, limit } = paginate(pageAt, pageLimit);
         console.log(offset);
@@ -69,10 +69,13 @@ const getPokemon = async (name, pageAt, pageLimit) => {
         //traer TODO en '/' ***************************************
         //retreive from PokeAPI
         try {
-          const response = await axios.get(`${API_POKEMON}?offset=${offset}&limit=${limit}`); //limite 12 (lotes de 12)
+          const response = await axios.get(
+            `${API_POKEMON}?offset=${offset}&limit=${limit}`
+          ); //limite 12 (lotes de 12)
           const { results } = response.data;
 
-          let reformattedArrayOfPokemonNames = results.map((poke) => {// {id: #, name: 'pokemon name'}
+          let reformattedArrayOfPokemonNames = results.map((poke) => {
+            // {id: #, name: 'pokemon name'}
             var rPoke = {}; //aux obj
             //get pokemon id from 'url'
             let pokemonUrlToArray = poke.url.split("/");
@@ -92,7 +95,7 @@ const getPokemon = async (name, pageAt, pageLimit) => {
           );
 
           const getThemAllPokemon = await Promise.all(pokemonPromises);
-          
+
           getThemAllPokemonSource.push(...getThemAllPokemon);
         } catch (error) {
           return { error: error.message };
@@ -118,23 +121,26 @@ const getPokemon = async (name, pageAt, pageLimit) => {
             model: Type,
             as: "types", //alias: debo cambiarlo tambien en la relación (db.js)
             attributes: ["name"], //requiero solo este dato (atributo)
-            through: { //tabla intermedia, nada
+            through: {
+              //tabla intermedia, nada
               attributes: [],
             },
           },
+          ...paginate( pageAt, pageLimit),
         });
         // getThemAllPokemonSource.push(...myDbPokemon);
         // console.log('que esssssssssssss: ', getThemAllPokemonSource);
 
         // return getThemAllPokemonSource.concat(myDbPokemon);
-        
-        // if(pageAt == 107){ //107
-          // return [...myDbPokemon, ...getThemAllPokemonSource];
-          return getThemAllPokemonSource;
-        // } else {
-          // return [...getThemAllPokemonSource];
-        // }
 
+        // if(pageAt == 107){ //107
+        // return [...myDbPokemon, ...getThemAllPokemonSource];
+        let booleanSource = (source === 'true');
+        if(booleanSource) {
+          return getThemAllPokemonSource;
+        } else {
+          return myDbPokemon;
+        }
       } catch (error) {
         return { error: error.message };
       }

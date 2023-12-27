@@ -25,11 +25,13 @@ function App() {
   const [page, setPage] = useState(0); //initial page 0
   const [pageSize, setPageSize] = useState(12) //items per page
 
+  const [sourceToggle, setSourceToggle] = useState(true); // 'true' -> API source
+
   useEffect(() => {
     //componentDidMount
-    dispatch(getAllPokemons(page, pageSize));
+    dispatch(getAllPokemons(page, pageSize, sourceToggle));
     dispatch(getAllTypes());
-  }, [page, pageSize]);
+  }, [page, pageSize, sourceToggle]);
 
   //traer 'types' de estado global
   const allTypes = useSelector(state => state.allTypes);
@@ -57,7 +59,7 @@ function App() {
     <div>
       <NavBar />
       <Routes>
-        <Route path='/home' element={<Cards onSearch={onSearch} page={page} setPage={setPage} pageSize={pageSize} setPageSize={setPageSize} />} />
+        <Route path='/home' element={<Cards onSearch={onSearch} page={page} setPage={setPage} pageSize={pageSize} setPageSize={setPageSize} sourceToggle={sourceToggle} setSourceToggle={setSourceToggle} />} />
         <Route path='/about' element={<About />} />
         <Route path='/' element={<Welcome />} />
         <Route path='/create' element={<PokemonCreate allTypes={allTypes} />} />

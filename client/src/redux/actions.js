@@ -11,10 +11,10 @@ import axios from "axios";
 
 const URL_BASE = "http://localhost:3001/pokemonapi";
 
-export const getAllPokemons = (page, pageSize) => {
+export const getAllPokemons = (page, pageSize, sourceToggle) => {
   return async function (dispatch) {
     try {
-      const { data } = await axios(`${URL_BASE}/pokemons?page=${page}&limit=${pageSize}`);
+      const { data } = await axios(`${URL_BASE}/pokemons?page=${page}&limit=${pageSize}&source=${sourceToggle}`);
       return dispatch({
         type: GET_ALL_POKEMONS,
         payload: data, //.results

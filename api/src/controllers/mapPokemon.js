@@ -14,7 +14,8 @@ const mapPokemonObject = (data) => {
       pokeTypes["name"] = typArr.type.name;
       return pokeTypes;
     }),
-    image: data.sprites.front_default,
+    // image: data.sprites.front_default,
+    image: data.sprites.other.dream_world.front_default,
   };
 
   return mappedData;

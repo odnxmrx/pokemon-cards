@@ -14,7 +14,10 @@ const Pokemon = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
+      validate: {
+        is: [/^[a-z\-]*$/] //only letters or symbol '-'
+      }
     },
     image: {
       type: DataTypes.STRING, // <- type for image ( database :postgresql )
@@ -49,7 +52,10 @@ const Pokemon = (sequelize) => {
     },
     weight: {
       type: DataTypes.INTEGER,
-      len: [0,400]
+      validate: {
+        min: 0,
+        max: 400
+      }
     }
   });
 };

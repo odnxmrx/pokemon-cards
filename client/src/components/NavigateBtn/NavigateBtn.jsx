@@ -4,7 +4,7 @@ function NavigateBtn({ page, setPage, allPokemonsLength }) {
 
     //condicion para desabilitar botones
     const prevBtnDisabled = page === 0; //|| props.allPokemonsLength < 3;
-    // console.log(props.allPokemonsLength);
+    
     const nextBtnDisabled = allPokemonsLength < 12; //si se muestran menos que '9'
 
     return (
