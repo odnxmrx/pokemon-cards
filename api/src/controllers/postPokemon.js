@@ -12,6 +12,9 @@ const createPokemonDB = async (
   weight
 ) => {
   try {
+    
+    if(types.length === 0) throw Error("'Type' muest be added.")
+
     //RELACION registro Pokemon' con la tabla 'Type'
     // Find the Types associated with the provided type names
     const typeInstances = await Type.findAll({
@@ -26,9 +29,7 @@ const createPokemonDB = async (
 
     //validar que existan en tabla Type
     // console.log(typeInstances.every(type => type instanceof Type)); //booleano
-    if (typeInstances.length !== types.length) {
-      throw Error("Pokemon type(s) must be existing one.");
-    }
+    if (typeInstances.length !== types.length) throw Error("Pokemon type(s) must be existing one.");
 
     const newPok = await Pokemon.create({
       name,
@@ -43,9 +44,10 @@ const createPokemonDB = async (
 
     if (typeInstances.length > 0) { // Relacionar Pokemon con los 'Types' encontrados
       await newPok.addType(typeInstances);
-      return newPok;
+      return `New Pokémon ${newPok.name} was created!`;
     } else { // En caso de que el 'type' no exista
-      return "no esiste tipo.";
+      throw Error("Pokemon 'Type' must be added.");
+      //return "Pokemon 'Type' must be added.";
     }
   } catch (error) {
     // res.status(404).json({ error: error.message });
