@@ -1,14 +1,20 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemonDetail, cleanDetail } from "../../redux/actions";
 import style from './Detail.module.css'
+import BackButton from "../BackButton/BackButton";
+import axios from "axios";
 
-const Detail = () => {
+const Detail = ({setPage}) => {
+
+    const API_URL = 'http://localhost:3001/pokemonapi/pokemons'
 
     const { id } = useParams(); //obtener params.id = 'name' (de la ruta)
     const dispatch = useDispatch();
     const pokemonDetail = useSelector(state => state.pokemonDetail);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(getPokemonDetail(id)); //componentDidMount
@@ -20,8 +26,23 @@ const Detail = () => {
         return (<span className={style.roundCircle} key={i}>{type?.name} </span>)
     })
 
+
+    const handleDelete = async () => {
+        try { //DELETE
+            const response = await axios.delete(`${API_URL}/${id}`);
+            console.log(response.data);
+            alert(response.data);
+        } catch (error) {
+            console.log(error);
+            // alert(error);
+        }
+        setPage(0); //reset de page view (will dispatch getAllPokemon)
+        // navigate('/home');
+    }
+
     return (
         <div className={style.mainContainer}>
+            <BackButton />
             <article className={style.detailContainer}>
                 <div className={style.leftContainer}>
                     <h2>{pokemonDetail?.name}</h2>
@@ -100,11 +121,14 @@ const Detail = () => {
                     </ul>
                     <br />
                     <div><br />Type: {pokemonTypes}</div>
-
+                    {/* DELETEEEEEEEEEEEEEE */}
+                    <div>
+                        <button type="button" onClick={handleDelete}>X Delete</button>
+                    </div>
                 </div>
                 <div className={style.rightContainer}>
                     <img src={pokemonDetail?.image} alt={`${pokemonDetail?.name} pokémon picture`} />
-                    
+
                 </div>
             </article>
         </div>

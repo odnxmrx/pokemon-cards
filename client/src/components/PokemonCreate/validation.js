@@ -63,6 +63,13 @@ export function validatePokemon(newPokemon) {
     if(newPokemon.weight > 400) {
         errors.weight = 'Weight value must be less than 400.'
     }
-    
+
+    // RegEx that matches any URL that is base, has a subdomain, or a path
+    const urlPattern = /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/;
+
+    if(!urlPattern.test(newPokemon.image)) {
+        errors.image = 'Image must be a direct image url.'
+    }
+
     return errors;
 }

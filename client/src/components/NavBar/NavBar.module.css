@@ -6,6 +6,7 @@
 
 ul {
     display: flex;
+    justify-content: center;
     gap: 12px;
     list-style-type: none;
     align-items: baseline;
@@ -14,7 +15,7 @@ ul {
 }
 
 li.myLogo {
-    margin-right: auto;
+    /* margin-right: auto; */
 }
 
 ul a {

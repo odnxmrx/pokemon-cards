@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { validatePokemon } from "./validation";
 import style from './PokemonCreate.module.css';
+import BackButton from "../BackButton/BackButton";
 
 const PokemonCreate = ({ allTypes }) => {
 
@@ -10,7 +11,7 @@ const PokemonCreate = ({ allTypes }) => {
     const [newPokemon, setNewPokemon] = useState({
         name: '',
     });
-    console.log('que va siendooooo: ', newPokemon);
+    // console.log('que va siendooooo: ', newPokemon);
     const [pokemonTypeSelection, setPokemonTypeSelection] = useState([]);
 
     const [errors, setErrors] = useState({}); //error validator
@@ -21,20 +22,15 @@ const PokemonCreate = ({ allTypes }) => {
             [event.target.name]: event.target.value, //valores dinámicos
             types: pokemonTypeSelection, //array of types
         })
+        setErrors(validatePokemon(newPokemon));
     }
 
     const listOfTypes = allTypes?.map((type, i) => {
         // console.log(type.name);
-        return (<><label key={type.id}>
+        return (<label key={type.id}>
             <input type="checkbox" id={type.name} value={type.name} />{type.name}
-        </label></>)
+        </label>)
     })
-
-
-    useEffect(()=> {
-        setErrors(validatePokemon(newPokemon));
-    }, [newPokemon])
-
 
     //******************puedo modularizar: (en error handler) */
     function validateTypeSelection(event) {
@@ -51,11 +47,10 @@ const PokemonCreate = ({ allTypes }) => {
         } else {//(pokemonTypeSelection.length >= 3){
             event.target.checked = false;
             pokemonTypeSelection.splice(pokemonTypeSelection.indexOf(event.target.value), 1);
-            alert('Select 1 to 2 Pokémon types only.')
+            // alert('Select 1 to 2 Pokémon types only.')
         }
     }
 
-    // console.log('ques pokemon typeselection: ', pokemonTypeSelection);
     // const reformatArrayOfTypes = pokemonTypeSelection.map(type => {
     //     var rType = {};
     //     rType['name'] = type;
@@ -66,12 +61,35 @@ const PokemonCreate = ({ allTypes }) => {
         event.preventDefault();
 
         //POST
-        axios.post(`${URL_BASE}`, newPokemon).then(response => alert('Pokémon created!'))
+        axios.post(`${URL_BASE}`, newPokemon).then(response => {
+            alert(response.data)
+            console.log('que fue response.data al crear el pokemon??? ', response.data);
+            setNewPokemon({
+                name:'',
+                attack:'',
+                defense:'',
+                height:'',
+                hp:'',
+                image:'',
+                speed:'',
+                types: [],
+                weight:'',
+            })
+        })
             .catch(error => alert(error.response.data.error));
+    };
+
+    const disableBtnValidator = () => {
+        return (
+            [newPokemon.name, newPokemon.image, newPokemon.hp, newPokemon.attack, newPokemon.defense, newPokemon.types].every(Boolean)
+            &&
+            newPokemon.types.length > 0
+        )
     }
 
     return (
         <div className={style.formContainer}>
+            <BackButton />
             <form action='' id="pokemon-create" onSubmit={handleSubmit}>
 
                 <label htmlFor="">Name:
@@ -80,6 +98,7 @@ const PokemonCreate = ({ allTypes }) => {
                         id='name'
                         name='name'
                         placeholder='Pokémon name'
+                        value={newPokemon.name}
                         onChange={handleInput}
                     />
                 </label>
@@ -92,6 +111,7 @@ const PokemonCreate = ({ allTypes }) => {
                         id="hp"
                         min="0"
                         max="255"
+                        value={newPokemon.hp}
                         onChange={handleInput}
                     />
                 </label>
@@ -105,6 +125,7 @@ const PokemonCreate = ({ allTypes }) => {
                         id="attack"
                         min="0"
                         max="180"
+                        value={newPokemon.attack}
                         onChange={handleInput}
                     />
                 </label>
@@ -118,6 +139,7 @@ const PokemonCreate = ({ allTypes }) => {
                         id="defense"
                         min="0"
                         max="230"
+                        value={newPokemon.defense}
                         onChange={handleInput}
                     />
                 </label>
@@ -131,6 +153,7 @@ const PokemonCreate = ({ allTypes }) => {
                         id="speed"
                         min="0"
                         max="180"
+                        value={newPokemon.speed}
                         onChange={handleInput}
                     />
                 </label>
@@ -144,6 +167,7 @@ const PokemonCreate = ({ allTypes }) => {
                         id="height"
                         min="0"
                         max="20"
+                        value={newPokemon.height}
                         onChange={handleInput}
                     />
                 </label>
@@ -157,6 +181,7 @@ const PokemonCreate = ({ allTypes }) => {
                         id="weight"
                         min="0"
                         max="400"
+                        value={newPokemon.weight}
                         onChange={handleInput}
                     />
                 </label>
@@ -175,11 +200,13 @@ const PokemonCreate = ({ allTypes }) => {
                         name="image"
                         id="image"
                         placeholder="Image URL"
+                        value={newPokemon.image}
                         onChange={handleInput}
                     />
                 </label>
+                {errors.image && <small>*{errors.image}</small>}
 
-                <button type='submit' id='submit' >Create Pokémon</button>
+                <button type='submit' id='submit' disabled={!disableBtnValidator()} >Create Pokémon</button>
             </form>
         </div>
     )

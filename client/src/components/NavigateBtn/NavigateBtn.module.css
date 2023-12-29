@@ -1,13 +1,14 @@
 .navigateContainer {
     display: inline-block;
     margin-left: auto;
+    text-align: center;
 }
 
 .navBtn {
     background-color: rgba(255, 255, 255, 0.125);
     border-radius: .9em;
     padding: 0.25em 0.5em;
-    margin: 10px 5px;
+    margin: 0 5px;
 }
 
 .navBtn:hover {

@@ -5,7 +5,7 @@ const PostPerPage = ({pageSize, setPageSize}) => {
     }
 
     return(
-        <>
+        <span>
         <label for='postpage'>
             <select name="postpage" id="postpage" onChange={handleChange}>
                 <option value="12">12 per page</option>
@@ -15,7 +15,7 @@ const PostPerPage = ({pageSize, setPageSize}) => {
                 <option value="24">24 per page</option>
             </select>
         </label>
-        </>
+        </span>
     )
 }
 

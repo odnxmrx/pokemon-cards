@@ -9,3 +9,9 @@ label select, input {
   padding: 10px 15px;
   border-radius: 0.7rem;
 }
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}

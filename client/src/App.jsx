@@ -12,7 +12,7 @@ import PokemonCreate from './components/PokemonCreate/PokemonCreate';
 import GoToPage from './components/GoToPage/GoToPage';
 import PostPerPage from './components/PostsPerPage/PostPerPage';
 import Welcome from './components/Welcome/Welcome';
-import NavigateBtn from './components/NavigateBtn/NavigateBtn';
+import Footer from './components/Footer/Footer';
 
 function App() {
 
@@ -43,32 +43,32 @@ function App() {
     axios(`${URL_BASE}/pokemons/?name=${name}`)
       //.then((response) => { console.log('que es response??: ', response)}, (reason) => { console.log('ques reason??: ', reason);
       .then(({ data }) => {
-        if (name) { //verificar si obtuvimos la info
+        if (data?.id) { //verificar si obtuvimos la info
           navigate(`/pokemon/${data.id}`);
         }
         else {
-          // console.log(data);
           alert('Pokémon not found.');
         }
       }
       )// catch respuesta (error) del servidor:
-      .catch(err => console.log(err))
+      .catch(err => alert(err.message))
   }
 
   return (
-    <div>
+    <div className='pageContainer'>
       <NavBar />
       <Routes>
         <Route path='/home' element={<Cards onSearch={onSearch} page={page} setPage={setPage} pageSize={pageSize} setPageSize={setPageSize} sourceToggle={sourceToggle} setSourceToggle={setSourceToggle} />} />
         <Route path='/about' element={<About />} />
         <Route path='/' element={<Welcome />} />
         <Route path='/create' element={<PokemonCreate allTypes={allTypes} />} />
-        <Route path='/pokemon/:id' element={<Detail />} />
+        <Route path='/pokemon/:id' element={<Detail setPage={setPage}/>} />
       </Routes>
       {pathname === '/home' && <PostPerPage pageSize={pageSize} setPageSize={setPageSize} />}
       {pathname === '/home' && <GoToPage setPage={setPage} />}
+      <Footer />
     </div>
   )
 }
 
-export default App
+export default App;

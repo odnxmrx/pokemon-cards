@@ -20,7 +20,7 @@ export default function getColor(type) {
         fairy: '#D685AD',
     };
 
-    return typeColors[type];
+    return typeColors[type] || '#777777';
   
   };
 

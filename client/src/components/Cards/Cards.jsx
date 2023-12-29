@@ -12,6 +12,7 @@ export default function Cards({ onSearch, page, setPage, sourceToggle, setSource
     const allPokemons = useSelector(state => state.allPokemons); //del estado, obtenemos allPokemons
 
     let tiposDisponibles = []; //los 'types' que están en montaje actual
+    
     allPokemons?.map(({ types }) => {
         types.forEach(element => {
             if (tiposDisponibles.indexOf(element.name) === -1) {

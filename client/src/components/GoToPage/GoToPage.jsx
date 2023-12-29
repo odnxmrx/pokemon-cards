@@ -17,11 +17,11 @@ export default function GoToPage(props) {
     };
 
     return (
-        <>
+        <span>
             <label htmlFor="">Go to page:
                 <input type="search" name="goPage" value={goPage} onChange={handleChange} onKeyDown={handleKeyDown} placeholder="Enter page" />
             </label>
             <button onClick={() => { props.setPage(goPage) }}>Go</button>
-        </>
+        </span>
     )
 }

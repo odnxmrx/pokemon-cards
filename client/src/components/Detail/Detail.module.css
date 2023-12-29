@@ -2,16 +2,20 @@
     display: flex;
     flex: 1;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .detailContainer {
     display: flex;
     justify-content: center;
+    gap: 10px;
 }
 
 .leftContainer {
     display: flex;
     flex-direction: column;
+    min-width: 300px;
     max-width: 800px;
     flex-grow: 1;
 }
