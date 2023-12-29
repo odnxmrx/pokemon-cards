@@ -90,6 +90,8 @@ const PokemonCreate = ({ allTypes }) => {
     return (
         <div className={style.formContainer}>
             <BackButton />
+            <h2>Pokémon Create</h2>
+            <p>Create your own Pokémon! Provide the following data:</p>
             <form action='' id="pokemon-create" onSubmit={handleSubmit}>
 
                 <label htmlFor="">Name:

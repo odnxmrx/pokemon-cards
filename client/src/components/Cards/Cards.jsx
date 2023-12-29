@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { filterByPokemonType, orderByPokemonName, orderByPokemonAttack } from '../../redux/actions';
+import { filterByPokemonType, orderByPokemonName, orderByPokemonAttack } from '../../services/actions';
 import Card from '../Card/Card';
 import Searchbar from '../Searchbar/Searchbar';
 import NavigateBtn from '../NavigateBtn/NavigateBtn';

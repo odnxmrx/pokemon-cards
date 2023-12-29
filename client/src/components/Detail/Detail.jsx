@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemonDetail, cleanDetail } from "../../redux/actions";
+import { getPokemonDetail, cleanDetail } from "../../services/actions";
 import style from './Detail.module.css'
 import BackButton from "../BackButton/BackButton";
 import axios from "axios";

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import Cards from './components/Cards/Cards';
 import Detail from './components/Detail/Detail';
-import { getAllPokemons, getAllTypes } from './redux/actions';
+import { getAllPokemons, getAllTypes } from './services/actions';
 import NavBar from './components/NavBar/NavBar';
 import About from './components/About/About';
 import PokemonCreate from './components/PokemonCreate/PokemonCreate';
@@ -56,13 +56,13 @@ function App() {
 
   return (
     <div className='pageContainer'>
-      <NavBar />
+      {pathname !== '/' && <NavBar />}
       <Routes>
         <Route path='/home' element={<Cards onSearch={onSearch} page={page} setPage={setPage} pageSize={pageSize} setPageSize={setPageSize} sourceToggle={sourceToggle} setSourceToggle={setSourceToggle} />} />
         <Route path='/about' element={<About />} />
         <Route path='/' element={<Welcome />} />
         <Route path='/create' element={<PokemonCreate allTypes={allTypes} />} />
-        <Route path='/pokemon/:id' element={<Detail setPage={setPage}/>} />
+        <Route path='/pokemon/:id' element={<Detail setPage={setPage} />} />
       </Routes>
       {pathname === '/home' && <PostPerPage pageSize={pageSize} setPageSize={setPageSize} />}
       {pathname === '/home' && <GoToPage setPage={setPage} />}

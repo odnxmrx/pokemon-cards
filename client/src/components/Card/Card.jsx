@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import style from './Card.module.css'
-import getColor from './colors.js'
+import getColor from '../../utils/colors.js'
 
 function Card({ id, name, image, hp, attack, types }) {
 
