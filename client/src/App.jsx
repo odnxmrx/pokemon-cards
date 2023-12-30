@@ -64,8 +64,6 @@ function App() {
         <Route path='/create' element={<PokemonCreate allTypes={allTypes} />} />
         <Route path='/pokemon/:id' element={<Detail setPage={setPage} />} />
       </Routes>
-      {pathname === '/home' && <PostPerPage pageSize={pageSize} setPageSize={setPageSize} />}
-      {pathname === '/home' && <GoToPage setPage={setPage} />}
       <Footer />
     </div>
   )

@@ -9,6 +9,6 @@ export default function BackButton (){
         navigate(-1);
     }
     return(
-        <button className={style.backBtn} onClick={handleNavigate}>Go back</button>
+        <button className={style.backBtn} onClick={handleNavigate}>← Go back</button>
     )
 }

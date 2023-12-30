@@ -16,12 +16,17 @@ export default function GoToPage(props) {
         };
     };
 
+    function handleSubmit(event) {
+        event.preventDefault();
+        props.setPage(goPage);
+    }
+
     return (
         <span>
-            <label htmlFor="">Go to page:
+            <label htmlFor="">Go to page:<br />
                 <input type="search" name="goPage" value={goPage} onChange={handleChange} onKeyDown={handleKeyDown} placeholder="Enter page" />
             </label>
-            <button onClick={() => { props.setPage(goPage) }}>Go</button>
+            <button onClick={handleSubmit}>Go</button>
         </span>
     )
 }

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { validatePokemon } from "./validation";
+import { validatePokemon } from "../../utils/validation";
 import style from './PokemonCreate.module.css';
 import BackButton from "../BackButton/BackButton";
 
@@ -72,7 +72,7 @@ const PokemonCreate = ({ allTypes }) => {
                 hp:'',
                 image:'',
                 speed:'',
-                types: [],
+                // types: [],
                 weight:'',
             })
         })

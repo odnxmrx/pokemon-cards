@@ -4,3 +4,38 @@
     flex-direction: column;
     justify-content: center;
 }
+
+.leftContainer {
+    flex-grow: 1;
+}
+
+.leftContainer p {
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+h3 {
+    margin-top: 0;
+}
+
+.rightContainer {
+    flex-grow: 3;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rightContainer small {
+    /* display: flex; */
+    /* align-self: flex-end; */
+}
+
+.rightContainer .pokemonLogo {
+    max-width: 300px;
+}
+
+img {
+    /* width: 90%; */
+    pointer-events: none;
+}

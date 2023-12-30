@@ -6,7 +6,7 @@ import style from './Detail.module.css'
 import BackButton from "../BackButton/BackButton";
 import axios from "axios";
 
-const Detail = ({setPage}) => {
+const Detail = ({ setPage }) => {
 
     const API_URL = 'http://localhost:3001/pokemonapi/pokemons'
 
@@ -25,7 +25,6 @@ const Detail = ({setPage}) => {
     const pokemonTypes = pokemonDetail?.types?.map((type, i) => {
         return (<span className={style.roundCircle} key={i}>{type?.name} </span>)
     })
-
 
     const handleDelete = async () => {
         try { //DELETE
@@ -121,10 +120,12 @@ const Detail = ({setPage}) => {
                     </ul>
                     <br />
                     <div><br />Type: {pokemonTypes}</div>
-                    {/* DELETEEEEEEEEEEEEEE */}
-                    <div>
-                        <button type="button" onClick={handleDelete}>X Delete</button>
-                    </div>
+                    {/* DELETE */}
+                    { pokemonDetail?.id?.length > 8 ? 
+                        (<div>
+                            <button type="button" onClick={handleDelete}>X Delete</button>
+                        </div>) : null
+                    }
                 </div>
                 <div className={style.rightContainer}>
                     <img src={pokemonDetail?.image} alt={`${pokemonDetail?.name} pokémon picture`} />

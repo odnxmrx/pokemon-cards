@@ -5,15 +5,16 @@ import Searchbar from '../Searchbar/Searchbar';
 import NavigateBtn from '../NavigateBtn/NavigateBtn';
 import SourceToggle from '../SourceToggle/SourceToggle';
 import style from './Cards.module.css';
+import NavigatorPack from '../NavigatorPack/NavigatorPack';
 
-export default function Cards({ onSearch, page, setPage, sourceToggle, setSourceToggle }) {
+export default function Cards({ onSearch, page, setPage, setPageSize, sourceToggle, setSourceToggle }) {
 
     const dispatch = useDispatch();
     const allPokemons = useSelector(state => state.allPokemons); //del estado, obtenemos allPokemons
 
     let tiposDisponibles = []; //los 'types' que están en montaje actual
-    
-    allPokemons?.map(({ types }) => {
+
+    allPokemons.map(({ types }) => {
         types.forEach(element => {
             if (tiposDisponibles.indexOf(element.name) === -1) {
                 tiposDisponibles.push(element.name);
@@ -90,6 +91,7 @@ export default function Cards({ onSearch, page, setPage, sourceToggle, setSource
                     })
                 }
             </div>
+            <NavigatorPack page={page} setPage={setPage} setPageSize={setPageSize} allPokemonsLength={allPokemons.length} />
         </div>
     )
 }
