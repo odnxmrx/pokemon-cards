@@ -1,7 +1,6 @@
 import BackButton from '../BackButton/BackButton';
 import style from './About.module.css';
 import pokemonintrovideo from '../../assets/opening-pokemon-t1-latino.mp4'
-import pokemonlogo from '../../assets/pokemon-logo-full-color.svg';
 import oldtvfram from '../../assets/old-tv-png-photo.png';
 
 const About = () => {
@@ -10,8 +9,6 @@ const About = () => {
         <div>
             <BackButton />
             <div className={style.aboutContainer}>
-
-
                 <div className={style.leftContainer}>
                     <h2>About</h2>
                     <p>Pokémon is an animated series that tells the story of <em>Ash Ketchum</em>,<br />a young Pokémon trainer from <em>Pallet Town</em> who begins a journey<br />to achieve his dream, to be a Pokémon Master.</p>
@@ -27,7 +24,6 @@ const About = () => {
                         Express | Morgan | Pg | Sequelize | Cors
                     </p>
                     <br />
-                    <hr />
                     <small>Developed by</small>
                     <h3>Armando Pineda Gama</h3>
                     <p><em>Full-Stack Developer</em></p>

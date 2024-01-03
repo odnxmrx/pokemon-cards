@@ -1,10 +1,56 @@
 .formContainer {
     display: flex;
     flex: 1;
-    flex-direction: column;
     justify-content: center;
+    gap: 12px;
 }
 
-.formContainer > form > small {
-    color: red;
+.formContainer .leftContainer {
+    display: flex;
+    min-width: 300px;
+    max-width: 600px;
+    flex-grow: 1;
+}
+
+span.leftItem {
+    display: inline-block;
+    width: 45%;
+    text-align: right;
+    padding: 5px 10px;
+    /*valign: top;*/
+  }
+  
+  span.rightItem {
+    display: inline-block;
+    /* width: 45%; */
+    padding: 5px 0;
+  }
+
+  .errorLog {
+    display: flex;
+    /* margin: 0 auto; */
+    justify-content: center;
+  }
+
+ form > small {
+    color: #E83030;
+    text-align: center;
+}
+
+.formContainer > form > fieldset {
+    max-width: 400px;
+    margin: auto;
+}
+
+.formButton {
+    display: flex;
+    margin: auto;
+}
+
+.formContainer .rightContainer {
+    display: flex;
+    flex-grow: 2;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
 }

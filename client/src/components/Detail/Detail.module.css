@@ -49,6 +49,10 @@
     /* padding: 0 5px; */
 }
 
+.leftContainer .pokemonTypeSection {
+    margin-bottom: 12px;
+}
+
 .rightContainer {
     display: flex;
     flex-direction: column;

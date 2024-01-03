@@ -1,7 +1,6 @@
 .aboutContainer {
   display: flex;
   /* flex: 1; */
-  /* flex-direction: column; */
   justify-content: center;
   gap: 12px;
   min-width: 800px;
@@ -16,7 +15,6 @@
 .leftContainer p {
   font-weight: 600;
   letter-spacing: 0.05em;
-  /* margin: inherit; */
 }
 
 .leftContainer h3 {
@@ -27,13 +25,11 @@
   display: flex;
   flex-grow: 2;
   justify-content: center;
-  /* flex-direction: column; */
   align-items: center;
 }
 
-.rightContainer small {
-  /* display: flex; */
-  /* align-self: flex-end; */
+.leftContainer small {
+  padding-top: 40px;
 }
 
 .rightContainer .pokemonLogo {
@@ -42,13 +38,13 @@
     left: 0;
     width: 100%;
     height: auto;
-    z-index: 1; /* Adjust the z-index as needed to place the image above the video */
+    z-index: 1;
   }
 
 .rightContainer .videoFrame {
     position: relative;
     left: 5px;
-    width: 400px; /* Adjust the width as needed */
+    width: 400px;
     height: auto;
   }
 

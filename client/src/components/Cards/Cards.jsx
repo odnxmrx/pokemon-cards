@@ -1,16 +1,23 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { filterByPokemonType, orderByPokemonName, orderByPokemonAttack } from '../../services/actions';
+import { getAllPokemons, filterByPokemonType, orderByPokemonName, orderByPokemonAttack } from '../../services/actions';
 import Card from '../Card/Card';
 import Searchbar from '../Searchbar/Searchbar';
 import NavigateBtn from '../NavigateBtn/NavigateBtn';
 import SourceToggle from '../SourceToggle/SourceToggle';
 import style from './Cards.module.css';
 import NavigatorPack from '../NavigatorPack/NavigatorPack';
+import { useEffect } from 'react';
 
-export default function Cards({ onSearch, page, setPage, setPageSize, sourceToggle, setSourceToggle }) {
+export default function Cards({ onSearch, page, setPage, pageSize,setPageSize, sourceToggle, setSourceToggle }) {
 
     const dispatch = useDispatch();
-    const allPokemons = useSelector(state => state.allPokemons); //del estado, obtenemos allPokemons
+    const {allPokemons} = useSelector(state => state); //del estado, obtenemos allPokemons
+
+
+    useEffect(()=> { //Al montar, consultar
+        dispatch(getAllPokemons(page, pageSize, sourceToggle));
+    }, []);
+
 
     let tiposDisponibles = []; //los 'types' que están en montaje actual
 
@@ -22,7 +29,6 @@ export default function Cards({ onSearch, page, setPage, setPageSize, sourceTogg
         })
     })
 
-    // console.log(tiposDisponibles);
     const listOfTypes = tiposDisponibles?.map((type, i) => {
         return <option key={i} value={type}>{type}</option>
     })

@@ -21,7 +21,6 @@ const Detail = ({ setPage }) => {
         return () => dispatch(cleanDetail()) //al desmontaje, limpiar el estado
     }, [id]) //observar cambios en id
 
-    // console.log('que hay en types', pokemonDetail.types);
     const pokemonTypes = pokemonDetail?.types?.map((type, i) => {
         return (<span className={style.roundCircle} key={i}>{type?.name} </span>)
     })
@@ -29,13 +28,11 @@ const Detail = ({ setPage }) => {
     const handleDelete = async () => {
         try { //DELETE
             const response = await axios.delete(`${API_URL}/${id}`);
-            console.log(response.data);
             alert(response.data);
-            setPage(0); //reset de page view (will dispatch getAllPokemon)
             navigate('/home');
+            setPage(0); //reset de page view (will dispatch getAllPokemon)
         } catch (error) {
-            console.log(error);
-            // alert(error);
+            alert(error);
         }
     }
 
@@ -119,17 +116,18 @@ const Detail = ({ setPage }) => {
 
                     </ul>
                     <br />
-                    <div><br />Type: {pokemonTypes}</div>
+                    <div className={style.pokemonTypeSection}>
+                        <br />Type: {pokemonTypes}
+                    </div>
                     {/* DELETE */}
-                    { pokemonDetail?.id?.length > 8 ? 
+                    {pokemonDetail?.id?.length > 8 ?
                         (<div>
-                            <button type="button" onClick={handleDelete}>X Delete</button>
+                            <button type="button" onClick={handleDelete}>✖ Delete</button>
                         </div>) : null
                     }
                 </div>
                 <div className={style.rightContainer}>
                     <img src={pokemonDetail?.image} alt={`${pokemonDetail?.name} pokémon picture`} />
-
                 </div>
             </article>
         </div>
