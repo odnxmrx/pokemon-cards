@@ -9,8 +9,6 @@ import { getAllPokemons, getAllTypes } from './services/actions';
 import NavBar from './components/NavBar/NavBar';
 import About from './components/About/About';
 import PokemonCreate from './components/PokemonCreate/PokemonCreate';
-import GoToPage from './components/GoToPage/GoToPage';
-import PostPerPage from './components/PostsPerPage/PostPerPage';
 import Welcome from './components/Welcome/Welcome';
 import Footer from './components/Footer/Footer';
 
@@ -36,6 +34,7 @@ function App() {
   //traer 'types' de estado global
   const allTypes = useSelector(state => state.allTypes);
   const allPokemons = useSelector(state => state.allPokemons);
+  console.log('que obtuve en allPokemons? ', allPokemons);
 
   function onSearch(name) {
     if (!name) return alert('Please, enter Pokémon name.');

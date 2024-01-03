@@ -1,41 +1,66 @@
 .aboutContainer {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  /* flex: 1; */
+  /* flex-direction: column; */
+  justify-content: center;
+  gap: 12px;
+  min-width: 800px;
 }
 
 .leftContainer {
-    flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .leftContainer p {
-    font-weight: 600;
-    letter-spacing: 0.05em;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  /* margin: inherit; */
 }
 
-h3 {
-    margin-top: 0;
+.leftContainer h3 {
+  margin: 0;
 }
 
 .rightContainer {
-    flex-grow: 3;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-grow: 2;
+  justify-content: center;
+  /* flex-direction: column; */
+  align-items: center;
 }
 
 .rightContainer small {
-    /* display: flex; */
-    /* align-self: flex-end; */
+  /* display: flex; */
+  /* align-self: flex-end; */
 }
 
 .rightContainer .pokemonLogo {
-    max-width: 300px;
+    position: absolute;
+    top: 10;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 1; /* Adjust the z-index as needed to place the image above the video */
+  }
+
+.rightContainer .videoFrame {
+    position: relative;
+    left: 5px;
+    width: 400px; /* Adjust the width as needed */
+    height: auto;
+  }
+
+.rightContainer #myVideo {
+  width: 380px;
+  height: auto;
+  position: relative;
+  left: 10px;
+  top: 15px;
 }
 
 img {
-    /* width: 90%; */
-    pointer-events: none;
+  /* width: 90%; */
+  pointer-events: none;
 }

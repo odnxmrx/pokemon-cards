@@ -65,16 +65,16 @@ const PokemonCreate = ({ allTypes }) => {
             alert(response.data)
             console.log('que fue response.data al crear el pokemon??? ', response.data);
             setNewPokemon({
-                name:'',
-                attack:'',
-                defense:'',
-                height:'',
-                hp:'',
-                image:'',
-                speed:'',
+                name: '',
+                attack: '',
+                defense: '',
+                height: '',
+                hp: '',
+                image: '',
+                speed: '',
                 // types: [],
-                weight:'',
-            })
+                weight: '',
+            });
         })
             .catch(error => alert(error.response.data.error));
     };

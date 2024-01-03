@@ -70,13 +70,15 @@
     margin: 10px 5px;
     /* word-break: break-all; */
     /* overflow-x: scroll; */
-    /* overflow: hidden; */
-    /* text-overflow: ellipsis; */
+    max-width: 70px;
+    max-height: 22px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .rightContainer {
     display: flex;
-    flex-grow: 2;
+    flex-grow: 1;
     justify-content: center;
 }
 

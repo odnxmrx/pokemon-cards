@@ -1,7 +1,33 @@
 .myFooter {
-    height: 72px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
+  height: 72px;
+  padding: 2rem 0;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  /* margin: auto; */
+  font-size: 14px;
+}
+
+.myFooter div {
+  margin: auto;
+}
+
+.myFooter .leftContainer {
+  margin-left: 0;
+}
+
+.myFooter .leftContainer a {
+  /* margin: 1em; */
+  display: inline-block;
+}
+
+.myFooter .leftContainer a img {
+  vertical-align: middle;
+}
+.myFooter .leftContainer a.flex {
+  display: inline-flex;
+}
+
+.pokemonLogo {
+  max-width: 120px;
 }

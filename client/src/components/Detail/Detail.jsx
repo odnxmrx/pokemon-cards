@@ -31,12 +31,12 @@ const Detail = ({ setPage }) => {
             const response = await axios.delete(`${API_URL}/${id}`);
             console.log(response.data);
             alert(response.data);
+            setPage(0); //reset de page view (will dispatch getAllPokemon)
+            navigate('/home');
         } catch (error) {
             console.log(error);
             // alert(error);
         }
-        setPage(0); //reset de page view (will dispatch getAllPokemon)
-        // navigate('/home');
     }
 
     return (
@@ -45,7 +45,7 @@ const Detail = ({ setPage }) => {
             <article className={style.detailContainer}>
                 <div className={style.leftContainer}>
                     <h2>{pokemonDetail?.name}</h2>
-                    <span>id: {pokemonDetail?.id}</span>
+                    <small>ID: {pokemonDetail?.id}</small>
 
 
                     <ul>

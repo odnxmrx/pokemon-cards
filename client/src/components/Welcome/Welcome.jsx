@@ -26,7 +26,7 @@ const Welcome = () => {
 
                 <h1>PokéApp</h1>
                 <p>Welcome to my Pokémon App. Here you'll find all things Pokémon. <br />Chatch 'em all! or create your own!</p>
-                <button onClick={() => navigate('/home')}>Enter</button>
+                <button onClick={() => navigate('/home')}>Enter →</button>
             {/* <button onClick={()=> playPauseBtn()}>Play/Pause</button> */}
             </div>
         </div>
