@@ -52,9 +52,6 @@ function App() {
       .catch(err => alert(err.message))
   }
 
-  //Filter and order
-
-
   return (
     <div className='pageContainer'>
       {pathname !== '/' && <NavBar />}

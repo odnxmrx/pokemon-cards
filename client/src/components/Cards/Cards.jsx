@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllPokemons, filterByPokemonType, orderByPokemonName, orderByPokemonAttack } from '../../services/actions';
+import { getAllPokemons } from '../../services/actions';
 import Card from '../Card/Card';
 import Searchbar from '../Searchbar/Searchbar';
 import NavigateBtn from '../NavigateBtn/NavigateBtn';
@@ -7,42 +7,18 @@ import SourceToggle from '../SourceToggle/SourceToggle';
 import style from './Cards.module.css';
 import NavigatorPack from '../NavigatorPack/NavigatorPack';
 import { useEffect } from 'react';
+import FilterOrder from '../FilterOrder/FilterOrder';
 
-export default function Cards({ onSearch, page, setPage, pageSize,setPageSize, sourceToggle, setSourceToggle }) {
+export default function Cards({ onSearch, page, setPage, pageSize, setPageSize, sourceToggle, setSourceToggle }) {
 
     const dispatch = useDispatch();
-    const {allPokemons} = useSelector(state => state); //del estado, obtenemos allPokemons
+    const { allPokemons } = useSelector(state => state); //del estado, obtenemos allPokemons
+    // const { filterOptions } = useSelector(state => state);
 
 
     useEffect(()=> { //Al montar, consultar
         dispatch(getAllPokemons(page, pageSize, sourceToggle));
     }, []);
-
-    let tiposDisponibles = []; //los 'types' que están en montaje actual
-
-    allPokemons.map(({ types }) => {
-        types.forEach(element => {
-            if (tiposDisponibles.indexOf(element.name) === -1) {
-                tiposDisponibles.push(element.name);
-            }
-        })
-    });
-
-    const listOfTypes = tiposDisponibles?.map((type, i) => {
-        return <option key={i} value={type}>{type}</option>
-    });
-
-    const handleTypeFilter = (event) => {
-        dispatch(filterByPokemonType(event.target.value));
-    };
-
-    const handleOrderByName = (event) => {
-        dispatch(orderByPokemonName(event.target.value));
-    };
-
-    const handleOrderByAttack = (event) => {
-        dispatch(orderByPokemonAttack(event.target.value));
-    };
 
     return (
         <div className={style.mainContainer}>
@@ -52,29 +28,7 @@ export default function Cards({ onSearch, page, setPage, pageSize,setPageSize, s
                 <div className={style.filterContainer}>
                     <SourceToggle sourceToggle={sourceToggle} setSourceToggle={setSourceToggle} setPage={setPage} />
                     <Searchbar onSearch={onSearch} />
-
-                    <label for="typefilter">Filter by type:<br />
-                        <select name="typefilter" id="typefilter" onChange={handleTypeFilter}>
-                            <option value="All">All types</option>
-                            {listOfTypes}
-                        </select>
-                    </label>
-
-                    <label for="nameorder">Order by name:<br />
-                        <select name="nameorder" id="nameorder" onChange={handleOrderByName}>
-                            {/* <option value="orderpokemon" disabled>Order by name</option> */}
-                            <option value="A">Ascendant</option>
-                            <option value="D">Descendant</option>
-                        </select>
-                    </label>
-
-                    <label for="attackorder">Order by attack:<br />
-                        <select name="attackorder" id="attackorder" onChange={handleOrderByAttack}>
-                            <option value="Menor">Ascendant</option>
-                            <option value="Mayor">Descendant</option>
-                        </select>
-                    </label>
-
+                    <FilterOrder />
                 </div>
                 <NavigateBtn page={page} setPage={setPage} allPokemonsLength={allPokemons.length} />
             </div>

@@ -6,6 +6,7 @@ import {
   FILTER_BY_POKEMON_TYPE,
   ORDER_BY_POKEMON_NAME,
   ORDER_BY_POKEMON_ATTACK,
+  SET_FILTER_OPTIONS,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -81,4 +82,11 @@ export const orderByPokemonAttack = (attack) => {
         type: ORDER_BY_POKEMON_ATTACK,
         payload: attack,
     }
+}
+
+export const setFilterOptions = (options) => {
+  return {
+    type: SET_FILTER_OPTIONS,
+    payload: options,
+  }
 }
