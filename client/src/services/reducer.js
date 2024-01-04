@@ -39,42 +39,44 @@ const rootReducer = (state = initialState, { type, payload }) => {
         allTypes: payload,
       };
     case FILTER_BY_POKEMON_TYPE:
-      const pokemonByType = [...state.allPokemons].filter(pokemon => {
-          return pokemon.types.some(type => type.name === payload);
-      })
+      const pokemonByType = [...state.allPokemons].filter((pokemon) => {
+        return pokemon.types.some((type) => type.name === payload);
+      });
+      
       return {
         ...state,
         allPokemons: payload === "All" ? state.AllpokemonAux : pokemonByType,
       };
     case ORDER_BY_POKEMON_NAME:
-        const sortPokemonByName = [...state.allPokemons]
-        
-        sortPokemonByName.sort((firstEl, secondEl) => {
-            if(payload === 'A') {
-                return firstEl.name.localeCompare(secondEl.name); //ordenando caracteres no ASCII
-            } else if(payload === 'D') {
-                return secondEl.name.localeCompare(firstEl.name);
-            }
-        })
-        // console.log('los ya disque ordenados: ', sortPokemonByName);
-        return {
-            ...state,
-            allPokemons: sortPokemonByName,
+      const sortPokemonByName = [...state.allPokemons];
+
+      sortPokemonByName.sort((firstEl, secondEl) => {
+        if (payload === "A") {
+          return firstEl.name.localeCompare(secondEl.name); //ordenando caracteres no ASCII
+        } else if (payload === "D") {
+          return secondEl.name.localeCompare(firstEl.name);
         }
+      });
+
+      return {
+        ...state,
+        allPokemons: sortPokemonByName,
+      };
     case ORDER_BY_POKEMON_ATTACK:
-
-        const sortPokemonByAttack = [...state.allPokemons].sort((firstEl, secondEl) => {
-            if(payload === 'Menor') {
-                return firstEl.attack - secondEl.attack;
-            } else if (payload === 'Mayor') {
-                return secondEl.attack - firstEl.attack;
-            }
-        })
-
-        return {
-            ...state,
-            allPokemons: sortPokemonByAttack
+      const sortPokemonByAttack = [...state.allPokemons].sort(
+        (firstEl, secondEl) => {
+          if (payload === "Menor") {
+            return firstEl.attack - secondEl.attack;
+          } else if (payload === "Mayor") {
+            return secondEl.attack - firstEl.attack;
+          }
         }
+      );
+
+      return {
+        ...state,
+        allPokemons: sortPokemonByAttack,
+      };
     default:
       return {
         ...state,

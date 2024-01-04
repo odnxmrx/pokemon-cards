@@ -18,7 +18,6 @@ export default function Cards({ onSearch, page, setPage, pageSize,setPageSize, s
         dispatch(getAllPokemons(page, pageSize, sourceToggle));
     }, []);
 
-
     let tiposDisponibles = []; //los 'types' que están en montaje actual
 
     allPokemons.map(({ types }) => {
@@ -27,11 +26,11 @@ export default function Cards({ onSearch, page, setPage, pageSize,setPageSize, s
                 tiposDisponibles.push(element.name);
             }
         })
-    })
+    });
 
     const listOfTypes = tiposDisponibles?.map((type, i) => {
         return <option key={i} value={type}>{type}</option>
-    })
+    });
 
     const handleTypeFilter = (event) => {
         dispatch(filterByPokemonType(event.target.value));

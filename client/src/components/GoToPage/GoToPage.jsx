@@ -26,7 +26,7 @@ export default function GoToPage(props) {
             <label htmlFor="">Go to page:<br />
                 <input type="search" inputMode="numeric" maxLength="3" pattern="\d{4,4}" name="goPage" value={goPage} onChange={handleChange} onKeyDown={handleKeyDown} placeholder="Enter page #" />
             </label>
-            <button onClick={handleSubmit}>Go</button>
+            <button onClick={handleSubmit} disabled={!/^[0-9]/.test(goPage)}>Go</button>
         </span>
     )
 }
